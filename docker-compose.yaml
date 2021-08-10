@@ -1,0 +1,18 @@
+version: "3"
+   
+services:
+  web:
+    container_name: DjangoTest
+    build: 
+        context: ./
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8001:8000"
+    networks:
+      - DjangoNetwork_dev
+networks:
+  DjangoNetwork_dev:
+    external:
+      name: DjangoNetwork_dev
