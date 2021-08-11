@@ -6,15 +6,15 @@ class AdressEntery(models.Model):
     FAMELE = 'f'
     # fix '1' error for choices 'choices' must be an iterable containing (actual value, human readable name) tuples django 3.1
     CHOICES_GENDER = [
-        (MALE, "Male"),
-        (FAMELE, 'Famele')
+        ('MALE', "Male"),
+        ('FAMELE', 'Famele')
     ]
     # person = models.ForeignKey(Person, on_delete=models.CASCADE)
     # contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
 
     name = models.CharField(max_length = 120)
     gender = models.CharField(max_length=9, choices=CHOICES_GENDER)
-    birthDate = models.DateField()
+    birthDate = models.DateField(blank=True)
     active = models.BooleanField(default=True)
     # if choices does not work uncommit
     # def is_superclass(self):
