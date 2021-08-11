@@ -21,10 +21,10 @@ def add_contact(response):
         form = CreateContact()
     return render(response, 'main/add_contact.html', {"form": form})
 
-def update_contact(response):
+def list_of_contacts(response):
     pass
 
-def list_of_contacts(response):
+def update_contact(response):
     pass
 
 def delete(response):
