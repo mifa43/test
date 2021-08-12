@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from contact import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/contact/', views.contact, name='contact'),
+    path('api/person/', views.person, name='person'),
+    path('api/addresses/', views.addresses, name='addresses'),
+    path('api/list-of-users/', views.list_of_contacts, name='list_of_contacts'),
+    path('api/delete/', views.delete, name='delete'),
+    path('api/update-contact/', views.update_contact, name='update_contact'),
+    path('api/add-contact/', views.add_contact, name='add_contact'),
 ]
