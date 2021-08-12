@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import CreateContact
 from .models import AdressEntery, Person, Contact
+
 # Create your views here.
 def add_contact(response):
     if response.method == 'POST':
@@ -22,7 +23,9 @@ def add_contact(response):
     return render(response, 'main/add_contact.html', {"form": form})
 
 def list_of_contacts(response):
-    pass
+    lista = AdressEntery.objects
+    ls = AdressEntery.objects.get(name='Mifa')
+    return render(response, 'main/contact_list.html', {"lista": lista, "ls": ls})
 
 def update_contact(response):
     pass
