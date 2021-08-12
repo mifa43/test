@@ -28,7 +28,7 @@ def list_of_contacts(response):
     lista = AdressEntery.objects
     for i in AdressEntery.objects.all():
         counter = AdressEntery.objects.all().count()
-        print(counter)
+        
         return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter})
 
     return render(response, 'main/contact_list.html', {})
