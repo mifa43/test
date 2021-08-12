@@ -5,6 +5,7 @@ from .models import AdressEntery, Person, Contact
 
 # Create your views here.
 def add_contact(response):
+    #This endpoint enters the contact information in our table
     if response.method == 'POST':
         form = CreateContact(response.POST)
         if form.is_valid():
@@ -17,7 +18,7 @@ def add_contact(response):
             add.person_set.create(firstName=first_name, lastName=last_name)
             add.contact_set.create(phoneNumber=phone_number)
 
-        return HttpResponseRedirect("http://localhost:8001/api/add-contact/")
+        return HttpResponseRedirect("http://localhost:8001/api/add-contact/")   #if the form is valid, we redirect to the same page with the restarted fields   
     else:
         form = CreateContact()
     return render(response, 'main/add_contact.html', {"form": form})
