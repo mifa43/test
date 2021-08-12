@@ -24,8 +24,10 @@ def add_contact(response):
 
 def list_of_contacts(response):
     lista = AdressEntery.objects
-    ls = AdressEntery.objects.get(name='Mifa')
-    return render(response, 'main/contact_list.html', {"lista": lista, "ls": ls})
+    for i in AdressEntery.objects.all():
+        return render(response, 'main/contact_list.html', {"lista": lista, "i": i})
+
+    return render(response, 'main/contact_list.html', {})
 
 def update_contact(response):
     pass
