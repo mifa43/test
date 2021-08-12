@@ -4,5 +4,28 @@
 List of contacts
 {% endblock %}
 {% block content %}
-    
+    {% for i in lista.all %}
+        {% for f in ls.person_set.all %}
+            <div class="input-group-text">
+                <ul>
+                    <li>
+                        {{i.name}}
+                    </li>
+                    <li style="text-transform:lowercase">
+                        {{i.gender}}
+                    </li>
+                    <li>
+                        {{i.birthDate}}
+                    </li>
+                    <li>
+                        {{f.firstName}}
+                    </li>
+                    <li>
+                        {{f.lastName}}
+                    </li>
+                </ul>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
 {% endblock %}
