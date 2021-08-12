@@ -4,6 +4,11 @@
 List of contacts
 {% endblock %}
 {% block content %}
+    {% if counter == null %}
+        <p>Contact number: <strong>0</strong></p>
+    {% else %}
+        <p>Contact number: <strong>{{ counter }}</strong></p>
+    {% endif %}
     {% for i in lista.all %}
         {% for f in i.person_set.all %}
             {% for q in i.contact_set.all %}
