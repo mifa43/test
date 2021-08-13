@@ -44,25 +44,58 @@ def update_contact(response, id):
                 update_rel = AdressEntery.objects.get(id=id)
                 update_rel.person_set.update(firstName=first_name, lastName=last_name)
                 update_rel.contact_set.update(phoneNumber=phone_number)
-            l = []
-            l.append(name,gender, birth_date, first_name, last_name, phone_number)
+        
+
+            if len(name) >= 1:
+                update = AdressEntery.objects.filter(id=id).update(name=name)
+            else:
+                update = AdressEntery.objects.get(id=id)
+                update = AdressEntery.objects.filter(id=id).update(name=update.name)
+            update = AdressEntery.objects.get(id=id)
             
-            # elif len(name) >= 1:
-            #     update = AdressEntery.objects.filter(id=id).update(name=name)
-            # elif len(gender) >= 1:
-            #     update = AdressEntery.objects.filter(id=id).update(gender=gender.upper())
-            # elif len(birth_date) >= 1:
-            #     update = AdressEntery.objects.filter(id=id).update(birthDate=birth_date)
-            # elif len(first_name) >= 1:
+            if len(update.gender) >= 1:
+                update = AdressEntery.objects.filter(id=id).update(gender=gender.upper())
+            # else:
             #     update = AdressEntery.objects.get(id=id)
-            #     update.person_set.update(firstName=first_name)
+            #     update = AdressEntery.objects.filter(id=id).update(gender=update.gender.upper())
+
+            if birth_date is not None:
+                update = AdressEntery.objects.filter(id=id).update(birthDate=birth_date)
+            else:
+                update = AdressEntery.objects.get(id=id)
+                update = AdressEntery.objects.filter(id=id).update(birthDate=update.birthDate)
+
+            if len(first_name) >= 1:
+                update = AdressEntery.objects.get(id=id)
+                update.person_set.update(firstName=first_name)
+            else:
+                update = AdressEntery.objects.get(id=id)
+                n = update.person_set.get(person_id=id)
+                update.person_set.update(firstName=n.firstName)
+
+            if len(last_name) >= 1:
+                update = AdressEntery.objects.get(id=id)
+                update.person_set.update(lastName=last_name)
+            else:
+                update = AdressEntery.objects.get(id=id)
+                n = update.person_set.get(person_id=id)
+                update.person_set.update(lastName=n.lastName)
             # elif len(last_name) >= 1:
             #     update = AdressEntery.objects.get(id=id)
             #     update.person_set.update(lastName=last_name)
+            if phone_number is not None:
+                update = AdressEntery.objects.get(id=id)
+                update.contact_set.update(phoneNumber=phone_number)
             # elif len(phone_number) >= 1:
             #     update = AdressEntery.objects.get(id=id)
             #     update.contact_set.update(phoneNumber=phone_number)
+            else:
+                update = AdressEntery.objects.get(id=id)
+                n = update.contact_set.get(contact_id=id)
+                update.contact_set.update(phoneNumber=n.phoneNumber)
 
+
+        print(name,gender, birth_date, first_name, last_name, phone_number)
         return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
     else:
         form = OptionalForm()
