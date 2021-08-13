@@ -1,11 +1,11 @@
 from django import forms
 
-class CreateContact(forms.Form):
+class CreateContact(forms.Form):    #the form contains fields that must be filled in to create a contact
     GENDER_CHOICES =(
     ("1", "Male"),
     ("2", "Famele"),
-)
-    YEARS =[x for x in range(1940,2022)]
+)   # values of Choice Field
+    YEARS =[x for x in range(1940,2022)] #beginning and end of year counting
 
     name = forms.CharField(label="name", max_length = 120, widget = forms.TextInput(attrs={'placeholder':'Enter name'}))
     gender = forms.ChoiceField(choices = GENDER_CHOICES)
