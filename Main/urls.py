@@ -23,7 +23,7 @@ urlpatterns = [
     path('api/person/', views.person, name='person'),
     path('api/addresses/', views.addresses, name='addresses'),
     path('api/list-of-contacts/', views.list_of_contacts, name='list_of_contacts'),
-    path('api/delete/', views.delete, name='delete'),
+    path('api/list-of-contacts/delete/<int:id>', views.delete, name='delete'),
     path('api/update-contact/<int:id>', views.update_contact, name='update_contact'),
     path('api/add-contact/', views.add_contact, name='add_contact'),
 ]
