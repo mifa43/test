@@ -29,11 +29,7 @@ def list_of_contacts(response):
         return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter})
 
     return render(response, 'main/contact_list.html', {})
-<<<<<<< HEAD
-=======
 
-
->>>>>>> defe7a90c3321c43e942183ef6bc8d1b29a89222
 
 def update_contact(response):
     print(response)
