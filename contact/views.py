@@ -86,8 +86,7 @@ def update_contact(response, id):
                 update = AdressEntery.objects.get(id=id)
                 n = update.contact_set.get(contact_id=id)
                 update.contact_set.update(phoneNumber=n.phoneNumber)
-
-
+                
         print(name,gender, birth_date, first_name, last_name, phone_number)
         return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
     else:
