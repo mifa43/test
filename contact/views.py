@@ -22,7 +22,13 @@ def add_contact(response):
     return render(response, 'main/add_contact.html', {"form": form})
 
 def list_of_contacts(response):
-    pass
+    lista = AdressEntery.objects
+    for i in AdressEntery.objects.all():
+        counter = AdressEntery.objects.all().count()
+
+        return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter})
+
+    return render(response, 'main/contact_list.html', {})
 
 def update_contact(response):
     pass
