@@ -21,6 +21,7 @@ List of contacts
                         <!-- add famele png -->
                     {% endif %}
                         <div class="container">
+                          
                             <p>Name: <strong>{{i.name}}</strong></p>
                             <p style="text-transform:lowercase">Gender: <strong>{{i.gender}}</strong></p>
                             <p>Birthday: <strong>{{i.birthDate}}</strong></p>
@@ -28,9 +29,12 @@ List of contacts
                             <p>Last name: <strong>{{f.lastName}}</strong></p>
                             <p>Phone number: <strong>{{q.phoneNumber}}</strong></p>
                         </div>
+                        
+                </div> 
+                <div class="input-group-text", style="width: 450px;">
+                    <a href="/" style="padding-left: 25%;">Changes</a><a href="/" style="padding-left: 25%;">Delete</a>
                 </div> <br>
             {% endfor %}
         {% endfor %}
     {% endfor %}
-
 {% endblock %}
