@@ -12,7 +12,7 @@ List of contacts
     {% for i in lista.all %}
         {% for f in i.person_set.all %}
             {% for q in i.contact_set.all %}
-                <div class="input-group-text", style="width: 450px">
+                <div class="input-group-text", style="width: 50%">
                     {% if i.gender == "MALE"%}
                         <img srcset="https://tse4.mm.bing.net/th?id=OIP.lgJhSn6zhYUv2gVStTuRMgHaHa&pid=Api&P=0&w=300&h=300" alt="Avatar" style="width:100%">
                         <!-- add male png -->
@@ -31,8 +31,20 @@ List of contacts
                         </div>
                         
                 </div> 
-                <div class="input-group-text", style="width: 450px;">
-                    <a href="/api/update-contact/{{i.id}}" style="padding-left: 25%;">Changes</a><a href="/" style="padding-left: 25%;">Delete</a>
+                <div class="input-group-text", style="width: 50%;">
+                    <a href="/api/update-contact/{{i.id}}" style="padding-left: 30%;">Changes</a>
+                    <script type="text/javascript">
+                        function clicked() {
+                        if (confirm('Do you want to delete the contact?')) {
+                            yourformelement.submit();
+                        } else {
+                            return false;
+                        }
+                        }
+                                                                                                    
+                    </script>
+                   
+                    <a href="/api/list-of-contacts/delete/{{i.id}}" onclick="clicked()" style="padding-left: 25%;">Delete</a>
                 </div> <br>
             {% endfor %}
         {% endfor %}
