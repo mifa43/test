@@ -93,8 +93,18 @@ def update_contact(response, id):
         form = OptionalForm()
     return render(response, 'main/contact_card.html', {"form": form})
 
-def delete(response):
-    pass
+def delete(response, id):
+    if id:
+        
+        print(id)
+    # if response.method == "POST":
+    #     print(response.POST)
+    #     if response.POST.get("popUp"):
+    #         text = response.POST.get("popUp")
+        return HttpResponseRedirect("http://localhost:8001/api/add-contact/")
+    
+
+    return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
 
 def contact(response):
     pass
