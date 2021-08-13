@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import CreateContact
+from .forms import CreateContact, OptionalForm
 from .models import AdressEntery, Person, Contact
 # Create your views here.
 def add_contact(response):
@@ -31,8 +31,19 @@ def list_of_contacts(response):
     return render(response, 'main/contact_list.html', {})
 
 
-def update_contact(response):
-    print(response)
+def update_contact(response, id):
+    if response.method == 'POST':
+        form = OptionalForm(response.POST)
+        if form.is_valid():
+            name, birth_date, first_name, last_name, phone_number = form.cleaned_data['name'], form.cleaned_data['birthDate'], form.cleaned_data['firstName'], form.cleaned_data['lastName'], form.cleaned_data['phoneNumber']
+            get_contact = AdressEntery.objects.filter(id=37).update(name=name)
+            print(get_contact)
+
+        
+        return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
+    else:
+        form = OptionalForm()
+    return render(response, 'main/contact_card.html', {"form": form})
 
 def delete(response):
     pass
