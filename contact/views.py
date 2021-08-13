@@ -39,12 +39,10 @@ def update_contact(response, id):
             gender = form.cleaned_data['gender']
             gender = dict(form.fields['gender'].choices)[gender]
             if name and gender and birth_date and first_name and last_name and phone_number:    #update only if each field filled
-
                 update = AdressEntery.objects.filter(id=id).update(name=name, gender=gender.upper(), birthDate=birth_date)
                 update_rel = AdressEntery.objects.get(id=id)
                 update_rel.person_set.update(firstName=first_name, lastName=last_name)
                 update_rel.contact_set.update(phoneNumber=phone_number)
-        
 
             if len(name) >= 1:
                 update = AdressEntery.objects.filter(id=id).update(name=name)
@@ -80,15 +78,10 @@ def update_contact(response, id):
                 update = AdressEntery.objects.get(id=id)
                 n = update.person_set.get(person_id=id)
                 update.person_set.update(lastName=n.lastName)
-            # elif len(last_name) >= 1:
-            #     update = AdressEntery.objects.get(id=id)
-            #     update.person_set.update(lastName=last_name)
+        
             if phone_number is not None:
                 update = AdressEntery.objects.get(id=id)
                 update.contact_set.update(phoneNumber=phone_number)
-            # elif len(phone_number) >= 1:
-            #     update = AdressEntery.objects.get(id=id)
-            #     update.contact_set.update(phoneNumber=phone_number)
             else:
                 update = AdressEntery.objects.get(id=id)
                 n = update.contact_set.get(contact_id=id)
