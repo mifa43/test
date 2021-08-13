@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+<!-- take everything from -->
+{% block title %}
+Edit contact
+{% endblock %}
+{% block content %}
+    <h3>Edit contact</h3>
+    <div class="input-group-text", style="width: 40%;">
+        <form method="POST", class="form-group">
+            {% csrf_token %}
+            {{form.name}}<br>
+            <br>
+            {{form.birthDate}}<br>
+            <br>
+            {{form.firstName}}<br>
+            <br>
+            {{form.lastName}}<br>
+            <br>
+            {{form.phoneNumber}}<br>
+            <br>
+            <p>{{form.gender}}<smal style="font-size: smaller;"> default*</small></p><br>
+            <br>
+            {{ adressentery.get_gender_display }}<br>
+            
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="submit", name="create", class="btn btn-success">Add contact</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
