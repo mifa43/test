@@ -102,6 +102,7 @@ def delete(response, id): #if the delete link is clicked, the javascript functio
     ##if there is no id we return the contact list
     return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
 
+
 def contact(response):
     pass
 
