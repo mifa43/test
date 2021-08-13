@@ -31,9 +31,8 @@ def list_of_contacts(response):
     return render(response, 'main/contact_list.html', {})
 
 
-
 def update_contact(response):
-    pass
+    print(response)
 
 def delete(response):
     pass
