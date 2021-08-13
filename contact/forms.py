@@ -14,7 +14,7 @@ class CreateContact(forms.Form):    #the form contains fields that must be fille
     lastName = forms.CharField(max_length = 120, widget = forms.TextInput(attrs={'placeholder':'Enter your last name'}))
     phoneNumber = forms.IntegerField(widget = forms.TextInput(attrs={'placeholder':'Enter phone number'}))
 
-class OptionalForm(forms.Form):
+class OptionalForm(forms.Form): #an endpoint update form that contains fields that are not required to be filled in and one value can be changed e.g. name
     GENDER_CHOICES =(
     ("1", "Male"),
     ("2", "Famele"),
