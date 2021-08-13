@@ -23,10 +23,11 @@ def add_contact(response):
 
 def list_of_contacts(response):
     lista = AdressEntery.objects
+    
     for i in AdressEntery.objects.all():
-        counter = AdressEntery.objects.all().count()
-
-        return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter})
+        counter_for_active = AdressEntery.objects.filter(active=True).count()
+        
+        return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter_for_active})
 
     return render(response, 'main/contact_list.html', {})
 
@@ -95,13 +96,8 @@ def update_contact(response, id):
 
 def delete(response, id):
     if id:
-        
-        print(id)
-    # if response.method == "POST":
-    #     print(response.POST)
-    #     if response.POST.get("popUp"):
-    #         text = response.POST.get("popUp")
-        return HttpResponseRedirect("http://localhost:8001/api/add-contact/")
+        update = AdressEntery.objects.filter(id=id).update(active=False)
+        return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
     
 
     return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
