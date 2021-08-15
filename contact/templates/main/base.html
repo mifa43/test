@@ -33,6 +33,36 @@
                 margin-left: 150px;
                 padding: 0px 10px;
             }
+            body{
+                width: 60%;
+                height: auto;
+
+            }
+            .container{
+                width: 20%;
+                height: auto;
+                box-sizing: border-box;
+                
+            }
+            .input-group-text{
+                width: 100%;
+                height: auto;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                flex-wrap: wrap;
+            }
+            
+            @media screen and (max-width:1280px){
+                .input-group-text{
+                    width: 55%;
+                }   
+             
+            }
+            
+            
+            
+                
             
         </style>
         <title>{% block title %}My website{% endblock %}</title>
