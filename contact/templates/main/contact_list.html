@@ -18,7 +18,7 @@ List of contacts
                             <img srcset="https://tse4.mm.bing.net/th?id=OIP.lgJhSn6zhYUv2gVStTuRMgHaHa&pid=Api&P=0&w=300&h=300" alt="Avatar" style="width:30%">
                             <!-- add male png -->
                         {% else %}
-                            <img srcset="https://tse2.mm.bing.net/th?id=OIP.pjQ06Dr9dcWSuB2XdeRCdwHaHa&pid=Api&P=0&w=300&h=300" alt="Avatar" style="width:30%;padding: 10px;">
+                            <img srcset="https://tse2.mm.bing.net/th?id=OIP.pjQ06Dr9dcWSuB2XdeRCdwHaHa&pid=Api&P=0&w=300&h=300" alt="Avatar" style="width:30%">
                             <!-- add famele png -->
                         {% endif %}
                             <div class="container" style="display: flex;flex-direction: row;justify-content: space-around;flex-wrap: wrap;">
@@ -42,18 +42,21 @@ List of contacts
                             }
                         </style>
                         <a href="/api/update-contact/{{i.id}}" style="text-decoration: none;">Changes</a>
-                        <script type="text/javascript">
+                        <!-- <script type="text/javascript">
+                            
                             function clicked() {
                             if (confirm('Do you want to delete the contact?')) {
+                                
                                 yourformelement.submit();
+                                
                             } else {
                                 return false;
                             }
-                            }
-                                                                                                        
-                        </script>
-                    
-                        <a href="/api/list-of-contacts/delete/{{i.id}}" onclick="clicked()" style="text-decoration: none;">Delete</a>
+                            }          
+                                                                                      
+                        </script> commented js function --> 
+                        
+                        <a href="/api/list-of-contacts/delete/{{i.id}}"  style="text-decoration: none;">Delete</a>
                     </div> <br>
                 {% endif %}
             {% endfor %}
