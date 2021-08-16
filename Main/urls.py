@@ -25,5 +25,5 @@ urlpatterns = [
     path('api/list-of-contacts/delete/<int:id>', views.delete, name='delete'),
     path('api/update-contact/<int:id>', views.update_contact, name='update_contact'),
     path('api/add-contact/', views.add_contact, name='add_contact'),
-    path('api/list-of-contacts/filter', views.filter, name='filter'),
+    path('api/list-of-contacts/filters', views.filters, name='filters'),
 ]
