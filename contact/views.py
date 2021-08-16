@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import CreateContact, OptionalForm
@@ -100,6 +101,10 @@ def delete(response, id): #if the delete link is clicked, the javascript functio
         return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/") 
     ##if there is no id we return the contact list
     return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
+def filters(response, date):
+    filter = AdressEntery.objects.filter(birthDate__range=["1940-1-1", f"{date}"])
+
+    return JsonResponse({"data": "pass"})
 
 def contact(response):
     pass
