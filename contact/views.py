@@ -1,6 +1,7 @@
+import json
 from django.http.response import JsonResponse
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, request
 from .forms import CreateContact, OptionalForm
 from .models import AdressEntery, Person, Contact
 from datetime import timedelta
@@ -104,14 +105,15 @@ def delete(response, id): #if the delete link is clicked, the javascript functio
     ##if there is no id we return the contact list
     return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
 def filters(response):
+    #if request.method == "POST":
     filter = AdressEntery.objects.filter(birthDate__range=["1940-1-1", "2000-1-11"])
-    for i in filter:
-        s = AdressEntery.objects.order_by('birthDate')
-        for j in s:
-            print(f"{j.name}|{j.birthDate}")
-
-    
-    return JsonResponse({"data": "aaa"})
+    for item in filter.order_by('-birthDate'):
+        contact_set = {item}
+        print(item, item.birthDate)
+    #     return render(response, 'main/contact_list.html', {"contact_set": contact_set})  
+    # return render(response, 'main/contact_list.html', {}) 
+        
+    return JsonResponse({"name": item.name, "item": item.birthDate})
 
 
 def contact(response):
