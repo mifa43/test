@@ -107,14 +107,13 @@ def delete(response, id): #if the delete link is clicked, the javascript functio
 def filters(response):
     print(response.method)
     if response.method == "GET":
-        filter = AdressEntery.objects.filter(birthDate__range=["1940-1-1", "2000-1-11"]).order_by('-birthDate')
+        f = AdressEntery.objects
         counter_for_active = AdressEntery.objects.filter(active=True).count()
-        #for item in filter.order_by('-birthDate'):
-            #contact_set = {item}
+        
         print(filter)
             
-        return render(response, 'main/contact_list.html', {"item": filter, "check": True, "counter": counter_for_active})
-    #return render(response, 'main/contact_list.html', {"check": False})
+        return render(response, 'main/filter.html', {"item": f.order_by('-birthDate'), "check": True, "counter": counter_for_active})
+    return render(response, 'main/filter.html', {})
 
 
 def contact(response):
