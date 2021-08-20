@@ -1,0 +1,75 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+List of contacts
+{% endblock %}
+{% block content %}
+    {% if counter == null %}
+        <p>Contact number: <strong>0</strong></p>
+    {% else %}
+        <p>Contact number: <strong>{{ counter }}</strong></p>
+    {% endif %}
+   
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <a href="http://localhost:8001/api/list-of-contacts/filters">
+                <button type="submit" name="filter", class="btn btn-success" >Filter by date</button>        </div>
+            </a>
+            <input type="text", name="new">
+    </div>
+    {% for i in item.filter%}
+        {% for f in i.person_set.all %}
+            {% for q in i.contact_set.all %}
+                {% if i.active == True %}
+                    <div class="input-group-text">
+                        {% if i.gender == "MALE"%}
+                            <img srcset="https://tse4.mm.bing.net/th?id=OIP.lgJhSn6zhYUv2gVStTuRMgHaHa&pid=Api&P=0&w=300&h=300" alt="Avatar" style="width:30%">
+                            <!-- add male png -->
+                        {% else %}
+                            <img srcset="https://tse2.mm.bing.net/th?id=OIP.pjQ06Dr9dcWSuB2XdeRCdwHaHa&pid=Api&P=0&w=300&h=300" alt="Avatar" style="width:30%">
+                            <!-- add famele png -->
+                        {% endif %}
+                        <div class="container" style="display: flex;flex-direction: row;justify-content: space-around;flex-wrap: wrap;">
+                        
+                            <p style="font-size: smaller;">Name: <strong>{{i.name}}</strong></p>
+                            <p style="text-transform:lowercase">Gender: <strong>{{i.gender}}</strong></p>
+                            <p style="font-size: smaller;">Birthday: <strong>{{i.birthDate}}</strong></p>
+                            <p style="font-size: smaller;">First name: <strong>{{f.firstName}}</strong></p>
+                            <p style="font-size: smaller;">Last name: <strong>{{f.lastName}}</strong></p>
+                            <p style="font-size: smaller;">Phone number: <strong>{{q.phoneNumber}}</strong></p>
+                        </div>
+                            
+                    </div> 
+                    <div class="input-group-text">
+                        <style type="text/css">
+                            a:hover {
+                                color: rgb(214, 85, 85);
+                                }
+                            a{
+                                color: black;
+                            }
+                        </style>
+                        <a href="/api/update-contact/{{i.id}}" style="text-decoration: none;">Changes</a>
+                        <!-- <script type="text/javascript">
+                            
+                            function clicked() {
+                            if (confirm('Do you want to delete the contact?')) {
+                                
+                                yourformelement.submit();
+                                
+                            } else {
+                                return false;
+                            }
+                            }          
+                                                                                      
+                        </script> commented js function --> 
+                        
+                        <a href="/api/list-of-contacts/delete/{{i.id}}"  style="text-decoration: none;">Delete</a>
+                    </div> <br>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+  
+    
+{% endblock %}
