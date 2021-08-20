@@ -1,11 +1,9 @@
-import json
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, request
 from .forms import CreateContact, OptionalForm
 from .models import AdressEntery, Person, Contact
-from datetime import timedelta
-import datetime
+
 # Create your views here.
 def add_contact(response):
     if response.method == 'POST':
@@ -108,13 +106,9 @@ def filters(response):
     print(response.method)
     if response.method == "GET":
         f = AdressEntery.objects
-        counter_for_active = AdressEntery.objects.filter(active=True).count()
-        
-        print(filter)
-            
+        counter_for_active = AdressEntery.objects.filter(active=True).count()        
         return render(response, 'main/filter.html', {"item": f.order_by('-birthDate'), "check": True, "counter": counter_for_active})
     return render(response, 'main/filter.html', {})
-
 
 def contact(response):
     pass
