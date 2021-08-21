@@ -15,6 +15,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from contact import views
+from registration import views as vis
 #paths and links in the web application
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +27,5 @@ urlpatterns = [
     path('api/update-contact/<int:id>', views.update_contact, name='update_contact'),
     path('api/add-contact/', views.add_contact, name='add_contact'),
     path('api/list-of-contacts/filters', views.filters, name='filters'),
+    path('register', vis.register, name='register'),
 ]
