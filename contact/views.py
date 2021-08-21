@@ -111,6 +111,7 @@ def filters(response):
         #if the get method we return the contact list sorted from younger to older
     return render(response, 'main/filter.html', {}) #returning empty contact card
 
+
 def contact(response):
     pass
 
