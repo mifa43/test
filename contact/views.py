@@ -1,7 +1,9 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, request
 from .forms import CreateContact, OptionalForm
 from .models import AdressEntery, Person, Contact
+
 # Create your views here.
 def add_contact(response):
     if response.method == 'POST':
@@ -98,8 +100,16 @@ def delete(response, id): #if the delete link is clicked, the javascript functio
     if id:  #we filter the card id that is selected
         update = AdressEntery.objects.filter(id=id).update(active=False)#if there is, we are disabling contact with that id
         return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/") 
-    ##if there is no id we return the contact list
+    #if there is no id we return the contact list
     return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
+
+def filters(response):
+    if response.method == "GET":    
+        f = AdressEntery.objects    #calling the object
+        counter_for_active = AdressEntery.objects.filter(active=True).count()  #filtering and counting active contacts
+        return render(response, 'main/filter.html', {"item": f.order_by('-birthDate'), "check": True, "counter": counter_for_active})
+        #if the get method we return the contact list sorted from younger to older
+    return render(response, 'main/filter.html', {}) #returning empty contact card
 
 def contact(response):
     pass
