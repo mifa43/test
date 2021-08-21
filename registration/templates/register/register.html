@@ -5,7 +5,7 @@ Create Account
 {% endblock %}
 
 {% load crispy_forms_tags %}
-{% block content %}
+{% block register %}
    <form method="POST" class="form-group">
        {% csrf_token %}
        {{form|crispy}}
