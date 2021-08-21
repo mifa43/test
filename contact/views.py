@@ -104,11 +104,12 @@ def delete(response, id): #if the delete link is clicked, the javascript functio
     return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
 
 def filters(response):
-    if response.method == "GET":
-        f = AdressEntery.objects
-        counter_for_active = AdressEntery.objects.filter(active=True).count()        
+    if response.method == "GET":    
+        f = AdressEntery.objects    #calling the object
+        counter_for_active = AdressEntery.objects.filter(active=True).count()  #filtering and counting active contacts
         return render(response, 'main/filter.html', {"item": f.order_by('-birthDate'), "check": True, "counter": counter_for_active})
-    return render(response, 'main/filter.html', {})
+        #if the get method we return the contact list sorted from younger to older
+    return render(response, 'main/filter.html', {}) #returning empty contact card
 
 def contact(response):
     pass
