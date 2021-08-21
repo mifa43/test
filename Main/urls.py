@@ -27,5 +27,6 @@ urlpatterns = [
     path('api/update-contact/<int:id>', views.update_contact, name='update_contact'),
     path('api/add-contact/', views.add_contact, name='add_contact'),
     path('api/list-of-contacts/filters', views.filters, name='filters'),
+    path('home/', views.home, name='home'),
     path('register', vis.register, name='register'),
 ]
