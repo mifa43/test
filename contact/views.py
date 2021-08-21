@@ -100,10 +100,10 @@ def delete(response, id): #if the delete link is clicked, the javascript functio
     if id:  #we filter the card id that is selected
         update = AdressEntery.objects.filter(id=id).update(active=False)#if there is, we are disabling contact with that id
         return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/") 
-    ##if there is no id we return the contact list
+    #if there is no id we return the contact list
     return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
+
 def filters(response):
-    print(response.method)
     if response.method == "GET":
         f = AdressEntery.objects
         counter_for_active = AdressEntery.objects.filter(active=True).count()        
