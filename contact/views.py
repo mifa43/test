@@ -30,7 +30,7 @@ def add_contact(response):
 
 def list_of_contacts(response):
     print(response.user.username)
-    check = AdressEntery.objects.get(user=response.user.id)
+    check = AdressEntery.objects.get(user=response.user.id) #izvuci id 
     if check.user in response.user.adressentery.all():
         lista = AdressEntery.objects
         
