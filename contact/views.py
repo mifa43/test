@@ -6,6 +6,7 @@ from .models import AdressEntery, Person, Contact
 
 # Create your views here.
 def add_contact(response):
+    
     if response.method == 'POST':
         form = CreateContact(response.POST)     #capturing post requests from the form
         if form.is_valid():     # validate form
