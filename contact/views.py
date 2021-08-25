@@ -6,7 +6,6 @@ from .models import AdressEntery, Person, Contact
 
 # Create your views here.
 def add_contact(response):
-    
     if response.method == 'POST':
         form = CreateContact(response.POST)     #capturing post requests from the form
         if form.is_valid():     # validate form
@@ -14,11 +13,14 @@ def add_contact(response):
             gender = form.cleaned_data['gender']
             gender = dict(form.fields['gender'].choices)[gender]
             #taking values from the form field
+        
+            
 
             add = AdressEntery(name=name, gender=gender.upper(), birthDate=birth_date)
             add.save()
             add.person_set.create(firstName=first_name, lastName=last_name)
             add.contact_set.create(phoneNumber=phone_number)
+            response.user.adressentery.add(add)
             #adding a new contact to the table and relation and saving it
 
         return HttpResponseRedirect("http://localhost:8001/api/add-contact/")   
@@ -27,12 +29,15 @@ def add_contact(response):
     return render(response, 'main/add_contact.html', {"form": form})    # rendering template
 
 def list_of_contacts(response):
-    lista = AdressEntery.objects
-    
-    for i in AdressEntery.objects.all():    # get all contact from tabel
-        counter_for_active = AdressEntery.objects.filter(active=True).count()   # counter only active contact
+    print(response.user.username)
+    check = AdressEntery.objects.get(user=response.user.id)
+    if check.user in response.user.adressentery.all():
+        lista = AdressEntery.objects
         
-        return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter_for_active})  # return lista which is the query variable for html fuction
+        for i in AdressEntery.objects.all():    # get all contact from tabel
+            counter_for_active = AdressEntery.objects.filter(active=True).count()   # counter only active contact
+            
+            return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter_for_active})  # return lista which is the query variable for html fuction
     return render(response, 'main/contact_list.html', {})   # return template view
 
 def update_contact(response, id):
