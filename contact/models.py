@@ -16,9 +16,6 @@ class AdressEntery(models.Model):
     gender = models.CharField(max_length=9, choices=CHOICES_GENDER)
     birthDate = models.DateField(blank=True)
     active = models.BooleanField(default=True)
-    # if choices does not work uncommit
-    # def is_superclass(self):
-    #     return self.CHOICES_GENDER in {self.MALE, self.FAMELE}
 
     def __str__(self):
         return self.name
