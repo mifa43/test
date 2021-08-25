@@ -28,6 +28,6 @@ urlpatterns = [
     path('api/add-contact/', views.add_contact, name='add_contact'),
     path('api/list-of-contacts/filters', views.filters, name='filters'),
     path('home/', views.home, name='home'),
-    path('register', vis.register, name='register'),
+    path('register/', vis.register, name='register'),
     path('', include('django.contrib.auth.urls')),
 ]
