@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class AdressEntery(models.Model):
@@ -11,7 +12,7 @@ class AdressEntery(models.Model):
     ]
     # person = models.ForeignKey(Person, on_delete=models.CASCADE)
     # contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=True)
     name = models.CharField(max_length = 120)
     gender = models.CharField(max_length=9, choices=CHOICES_GENDER)
     birthDate = models.DateField(blank=True)
