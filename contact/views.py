@@ -13,11 +13,14 @@ def add_contact(response):
             gender = form.cleaned_data['gender']
             gender = dict(form.fields['gender'].choices)[gender]
             #taking values from the form field
+        
+            
 
             add = AdressEntery(name=name, gender=gender.upper(), birthDate=birth_date)
             add.save()
             add.person_set.create(firstName=first_name, lastName=last_name)
             add.contact_set.create(phoneNumber=phone_number)
+            response.user.adressentery.add(add)
             #adding a new contact to the table and relation and saving it
 
         return HttpResponseRedirect("http://localhost:8001/api/add-contact/")   
@@ -26,12 +29,15 @@ def add_contact(response):
     return render(response, 'main/add_contact.html', {"form": form})    # rendering template
 
 def list_of_contacts(response):
-    lista = AdressEntery.objects
+    for k in response.user.adressentery.all():
+        print(k.user)
     
-    for i in AdressEntery.objects.all():    # get all contact from tabel
-        counter_for_active = AdressEntery.objects.filter(active=True).count()   # counter only active contact
-        
-        return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter_for_active})  # return lista which is the query variable for html fuction
+        lista = AdressEntery.objects.filter(user=k.user)
+            #name__startswith
+        for i in AdressEntery.objects.all():    # get all contact from tabel
+            counter_for_active = AdressEntery.objects.filter(active=True,user=k.user).count()   # counter only active contact
+                
+            return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter_for_active})  # return lista which is the query variable for html fuction
     return render(response, 'main/contact_list.html', {})   # return template view
 
 def update_contact(response, id):
@@ -104,10 +110,11 @@ def delete(response, id): #if the delete link is clicked, the javascript functio
     return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")
 
 def filters(response):
-    if response.method == "GET":    
-        f = AdressEntery.objects    #calling the object
-        counter_for_active = AdressEntery.objects.filter(active=True).count()  #filtering and counting active contacts
-        return render(response, 'main/filter.html', {"item": f.order_by('-birthDate'), "check": True, "counter": counter_for_active})
+    if response.method == "GET":  
+        for k in response.user.adressentery.all():
+            f = AdressEntery.objects.filter(user=k.user) #calling the object
+            counter_for_active = AdressEntery.objects.filter(active=True,user=k.user).count()  #filtering and counting active contacts
+            return render(response, 'main/filter.html', {"item": f.order_by('-birthDate'), "check": True, "counter": counter_for_active})
         #if the get method we return the contact list sorted from younger to older
     return render(response, 'main/filter.html', {}) #returning empty contact card
 

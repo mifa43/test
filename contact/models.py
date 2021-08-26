@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class AdressEntery(models.Model):
     MALE = 'm'
@@ -11,14 +11,11 @@ class AdressEntery(models.Model):
     ]
     # person = models.ForeignKey(Person, on_delete=models.CASCADE)
     # contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="adressentery", null=True)
     name = models.CharField(max_length = 120)
     gender = models.CharField(max_length=9, choices=CHOICES_GENDER)
     birthDate = models.DateField(blank=True)
     active = models.BooleanField(default=True)
-    # if choices does not work uncommit
-    # def is_superclass(self):
-    #     return self.CHOICES_GENDER in {self.MALE, self.FAMELE}
 
     def __str__(self):
         return self.name
