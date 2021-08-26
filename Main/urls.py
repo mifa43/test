@@ -30,4 +30,5 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('register/', vis.register, name='register'),
     path('', include('django.contrib.auth.urls')),
+    path('', views.redirect, name='redirect'),
 ]
