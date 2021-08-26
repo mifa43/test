@@ -16,6 +16,9 @@ from django.contrib import admin
 from django.urls import path, include
 from contact import views
 from registration import views as vis
+from django.views.generic import RedirectView
+from django.conf.urls import url
+
 #paths and links in the web application
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +34,6 @@ urlpatterns = [
     path('register/', vis.register, name='register'),
     path('', include('django.contrib.auth.urls')),
     path('', views.redirect, name='redirect'),
+    url(r'^favicon\.ico$',RedirectView.as_view(url='/static/images/favicon.ico')),
+
 ]
