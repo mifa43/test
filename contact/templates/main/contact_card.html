@@ -10,15 +10,15 @@ Edit contact
         <form method="POST", class="form-group">
             <!-- displaying form fields -->
             {% csrf_token %}
-            {{form.name}}<br>
+            <input type="text" name="name" value="{{auto.name}}"><br>
             <br>
-            {{form.birthDate}}<br>
+            <input type="date" name="birthDate" value="{{auto.birthDate}}"><br>
             <br>
-            {{form.firstName}}<br>
+            <input type="text" name="firstName" value="{{person.firstName}}"><br>
             <br>
-            {{form.lastName}}<br>
+            <input type="text" name="lastName" value="{{person.lastName}}"><br>
             <br>
-            {{form.phoneNumber}}<br>
+            <input type="number" name="phoneNumber" value="{{contact.phoneNumber}}"><br>
             <br>
             <p>{{form.gender}}<smal style="font-size: smaller;"> default*</small></p><br>
             <br>
@@ -33,3 +33,4 @@ Edit contact
         </form>
     </div>
 {% endblock %}
+<!-- <p>{{form.gender}}<smal style="font-size: smaller;"> default*</small></p> -->
