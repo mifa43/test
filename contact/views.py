@@ -95,7 +95,11 @@ def update_contact(response, id):
         return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")  # redirect and show contact list
     else:
         form = OptionalForm()
-    return render(response, 'main/contact_card.html', {"form": form})   # rendering card for contact
+        #variables that have values from the database and automatically populate the contact fields and return it to update section in html
+        auto = update = AdressEntery.objects.get(id=id)
+        person = auto.person_set.get(person_id=id)
+        contact = auto.contact_set.get(contact_id=id)
+    return render(response, 'main/contact_card.html', {"form": form, "auto": auto, "person": person, "contact": contact})   # rendering card for contact
 
 def delete(response, id): #if the delete link is clicked, the javascript function creates a popup window with a message and a confirmation button
     if id:  #we filter the card id that is selected
