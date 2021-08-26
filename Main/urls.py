@@ -16,12 +16,12 @@ from django.contrib import admin
 from django.urls import path, include
 from contact import views
 from registration import views as vis
+from django.views.generic import RedirectView
+from django.conf.urls import url
+
 #paths and links in the web application
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/contact/', views.contact, name='contact'),
-    path('api/person/', views.person, name='person'),
-    path('api/addresses/', views.addresses, name='addresses'),
     path('api/list-of-contacts/', views.list_of_contacts, name='list_of_contacts'),
     path('api/list-of-contacts/delete/<int:id>', views.delete, name='delete'),
     path('api/update-contact/<int:id>', views.update_contact, name='update_contact'),
@@ -30,4 +30,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('register/', vis.register, name='register'),
     path('', include('django.contrib.auth.urls')),
+    path('', views.redirect, name='redirect'),
+    url(r'^favicon\.ico$',RedirectView.as_view(url='/static/images/favicon.ico')),
+
 ]
