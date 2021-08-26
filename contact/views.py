@@ -120,6 +120,10 @@ def filters(response):
 
 def home(response):
     return render(response, 'main/home.html', {})
+
+def redirect(response):
+   return HttpResponseRedirect("http://localhost:8001/home")
+   
 def contact(response):
     pass
 
