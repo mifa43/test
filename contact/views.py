@@ -29,15 +29,16 @@ def add_contact(response):
     return render(response, 'main/add_contact.html', {"form": form})    # rendering template
 
 def list_of_contacts(response):
-    for k in response.user.adressentery.all():
-        print(k.user)
-    
-        lista = AdressEntery.objects.filter(user=k.user)
-            #name__startswith
-        for i in AdressEntery.objects.all():    # get all contact from tabel
-            counter_for_active = AdressEntery.objects.filter(active=True,user=k.user).count()   # counter only active contact
-                
-            return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter_for_active})  # return lista which is the query variable for html fuction
+    if response.method == 'POST':
+        for k in response.user.adressentery.all():
+            print(k.user)
+        
+            lista = AdressEntery.objects.filter(user=k.user)
+                #name__startswith
+            for i in AdressEntery.objects.all():    # get all contact from tabel
+                counter_for_active = AdressEntery.objects.filter(active=True,user=k.user).count()   # counter only active contact
+                    
+                return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter_for_active})  # return lista which is the query variable for html fuction
     return render(response, 'main/contact_list.html', {})   # return template view
 
 def update_contact(response, id):
@@ -123,7 +124,7 @@ def home(response):
 
 def redirect(response):
    return HttpResponseRedirect("http://localhost:8001/home")
-   
+
 def contact(response):
     pass
 
