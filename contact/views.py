@@ -120,12 +120,3 @@ def home(response):
 
 def redirect(response):
    return HttpResponseRedirect("http://localhost:8001/home")    # if we type localhost:8001/ we want to redirect to home page
-
-def contact(response):
-    pass
-
-def person(response):
-    pass
-
-def addresses(response):
-    pass
