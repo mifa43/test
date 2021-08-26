@@ -11,7 +11,7 @@ class AdressEntery(models.Model):
     ]
     # person = models.ForeignKey(Person, on_delete=models.CASCADE)
     # contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="adressentery", null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="adressentery", null=True) #represents the user who is logged in and when creating a contact we assign the user name
     name = models.CharField(max_length = 120)
     gender = models.CharField(max_length=9, choices=CHOICES_GENDER)
     birthDate = models.DateField(blank=True)
