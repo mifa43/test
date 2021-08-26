@@ -26,10 +26,9 @@ def add_contact(response):
 
 def list_of_contacts(response):
     if response.method == 'GET':
-        for k in response.user.adressentery.all():
+        for k in response.user.adressentery.all(): #this is how we capture a user who is logged in
             #we filter contacts by logged in user and check if the contact belongs to him
             lista = AdressEntery.objects.filter(user=k.user) 
-                #name__startswith
             for i in AdressEntery.objects.all():    # get all contact from tabel
                 #the counter counts contacts by activity and by user
                 counter_for_active = AdressEntery.objects.filter(active=True,user=k.user).count()   # counter only active contact
@@ -117,10 +116,10 @@ def filters(response):
     return render(response, 'main/filter.html', {}) #returning empty contact card
 
 def home(response):
-    return render(response, 'main/home.html', {})
+    return render(response, 'main/home.html', {})   #home page for navigation
 
 def redirect(response):
-   return HttpResponseRedirect("http://localhost:8001/home")
+   return HttpResponseRedirect("http://localhost:8001/home")    # if we type localhost:8001/ we want to redirect to home page
 
 def contact(response):
     pass
