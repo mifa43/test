@@ -27,9 +27,11 @@ def add_contact(response):
 def list_of_contacts(response):
     if response.method == 'GET':
         for k in response.user.adressentery.all():
-            lista = AdressEntery.objects.filter(user=k.user)
+            #we filter contacts by logged in user and check if the contact belongs to him
+            lista = AdressEntery.objects.filter(user=k.user) 
                 #name__startswith
             for i in AdressEntery.objects.all():    # get all contact from tabel
+                #the counter counts contacts by activity and by user
                 counter_for_active = AdressEntery.objects.filter(active=True,user=k.user).count()   # counter only active contact
                 return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter_for_active})  # return lista which is the query variable for html fuction
     return render(response, 'main/contact_list.html', {})   # return template view
@@ -105,8 +107,10 @@ def delete(response, id): #if the delete link is clicked, the javascript functio
 
 def filters(response):
     if response.method == "GET":  
-        for k in response.user.adressentery.all():
+        for k in response.user.adressentery.all():  #this is how we capture a user who is logged in
+            #we filter contacts by logged in user and check if the contact belongs to him
             f = AdressEntery.objects.filter(user=k.user) #calling the object
+            #the counter counts contacts by activity and by user
             counter_for_active = AdressEntery.objects.filter(active=True,user=k.user).count()  #filtering and counting active contacts
             return render(response, 'main/filter.html', {"item": f.order_by('-birthDate'), "check": True, "counter": counter_for_active})
         #if the get method we return the contact list sorted from younger to older
