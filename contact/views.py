@@ -95,6 +95,7 @@ def update_contact(response, id):
         return HttpResponseRedirect("http://localhost:8001/api/list-of-contacts/")  # redirect and show contact list
     else:
         form = OptionalForm()
+        #variables that have values from the database and automatically populate the contact fields and return it to update section in html
         auto = update = AdressEntery.objects.get(id=id)
         person = auto.person_set.get(person_id=id)
         contact = auto.contact_set.get(contact_id=id)
