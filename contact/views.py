@@ -25,7 +25,7 @@ def add_contact(response):
     return render(response, 'main/add_contact.html', {"form": form})    # rendering template
 
 def list_of_contacts(response):
-    if response.method == 'POST':
+    if response.method == 'GET':
         for k in response.user.adressentery.all():
             lista = AdressEntery.objects.filter(user=k.user)
                 #name__startswith
