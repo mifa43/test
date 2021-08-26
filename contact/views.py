@@ -13,16 +13,12 @@ def add_contact(response):
             gender = form.cleaned_data['gender']
             gender = dict(form.fields['gender'].choices)[gender]
             #taking values from the form field
-        
-            
-
             add = AdressEntery(name=name, gender=gender.upper(), birthDate=birth_date)
             add.save()
             add.person_set.create(firstName=first_name, lastName=last_name)
             add.contact_set.create(phoneNumber=phone_number)
-            response.user.adressentery.add(add)
+            response.user.adressentery.add(add)     # add user to conntact
             #adding a new contact to the table and relation and saving it
-
         return HttpResponseRedirect("http://localhost:8001/api/add-contact/")   
     else:
         form = CreateContact()  # if not post then just show form 
@@ -31,13 +27,10 @@ def add_contact(response):
 def list_of_contacts(response):
     if response.method == 'POST':
         for k in response.user.adressentery.all():
-            print(k.user)
-        
             lista = AdressEntery.objects.filter(user=k.user)
                 #name__startswith
             for i in AdressEntery.objects.all():    # get all contact from tabel
                 counter_for_active = AdressEntery.objects.filter(active=True,user=k.user).count()   # counter only active contact
-                    
                 return render(response, 'main/contact_list.html', {"lista": lista, "i": i, "counter": counter_for_active})  # return lista which is the query variable for html fuction
     return render(response, 'main/contact_list.html', {})   # return template view
 
