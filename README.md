@@ -73,4 +73,8 @@ ___
 
 ### List of contacts
 
-> To view your contact list, tap contacts in the navigation bar and a contact information tab will be displayed
+> To view your contact list, tap contacts in the navigation bar and a contact information tab will be displayed.
+
+### Filters
+
+> Above the contact card is an option to filter the contact by date, this option will sort your contacts from younger to older.
