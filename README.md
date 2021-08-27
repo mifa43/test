@@ -9,14 +9,14 @@
 - [Usage ](#Usage )
   - [Contact book endpoints](#Contact-book)    
     - [Admin](#Admin)
+    - [Register](#Register)
+    - [Login](#Login)
+    - [Add-contact](#Add-contact)
     - [List of all contacts](#List-of-contacts)
     - [Delete](#Delete)
     - [Update-contact](#Update-contact)
-    - [Add-contact](#Add-contact)
     - [Filters](#Filters)
     - [Home](#Home)
-    - [Register](#Register)
-    - [Login](#Login)
 - [Contact](#Contact)
 
 </details>
@@ -58,4 +58,16 @@ ___
 
     Username: admin1
     Password: mypassword1
-    
+
+### Register
+
+> If we try to access one of the endpoints we will only see a link that requires logging in by clicking on it, we get a login form where we need to authenticate. If we do not have an account, there is a link for registration below.
+
+### Login
+
+> After successfully creating an account, you are ready to log in and perform the first actions in the application (Contact Book).
+
+### Add contact
+
+> To create a contact, it is necessary to fill in the fields and add a contact by pressing the button.
+
