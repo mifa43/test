@@ -5,11 +5,11 @@
 
 - [Description](#Description) 
 - [License](#License)
-- [Settings](#Settings)
+- [Docker command](#Docker-command)
 - [Usage ](#Usage )
-  - [Contact-book endpoints](#Contact-book)    
+  - [Contact book endpoints](#Contact-book)    
     - [Admin](#Admin)
-    - [List-of-contacts](#List-of-contacts)
+    - [List of all contacts](#List-of-contacts)
     - [Delete](#Delete)
     - [Update-contact](#Update-contact)
     - [Add-contact](#Add-contact)
@@ -30,3 +30,18 @@ ___
 ## License
 - Apache License 
 - ##### [Read more about licenses](https://github.com/mifa43/test-repetition/blob/main/LICENSE)
+
+
+## Docker command
+- **Terminal :**
+> ##### Go to the root folder where docker-compose is located and this command will make sure that the application starts successfully.
+
+    docker-compose up --build -d
+
+> ##### This command will open logs so that background execution can be monitored.
+
+    docker container logs -f DjangoTest
+
+> ##### If it is necessary to call some of the django-admin commands, this can be done with the accompanying command.
+
+    docker exec -it DjangoTest /bin/bash
