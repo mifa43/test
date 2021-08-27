@@ -11,11 +11,11 @@
     - [Admin](#Admin)
     - [Register](#Register)
     - [Login](#Login)
-    - [Add-contact](#Add-contact)
+    - [Add contact](#Add-contact)
     - [List of contacts](#List-of-contacts)
-    - [Delete](#Delete)
-    - [Update-contact](#Update-contact)
     - [Filters](#Filters)
+    - [Update contact](#Update-contact)
+    - [Delete](#Delete)
     - [Home](#Home)
 - [Contact](#Contact)
 
@@ -78,3 +78,5 @@ ___
 ### Filters
 
 > Above the contact card is an option to filter the contact by date, this option will sort your contacts from younger to older.
+
+### Update-contact
