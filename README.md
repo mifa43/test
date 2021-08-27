@@ -71,3 +71,6 @@ ___
 
 > To create a contact, it is necessary to fill in the fields and add a contact by pressing the button.
 
+### List of all contacts
+
+> To view your contact list, tap contacts in the navigation bar and a contact information tab will be displayed
