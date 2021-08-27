@@ -98,3 +98,5 @@ ___
 ### Contact
 
 - **Email**: [Milos Zlatkovic](mailto:milos.zlatkovic.it@gmail.com?subject=[GitHub]Test-repo)
+
+- **Linkedin**: [Milos Zlatkovic](https://www.linkedin.com/in/milos-zlatkovic-b0644a1b1/)
