@@ -20,3 +20,13 @@
 - [Contact](#Contact)
 
 </details>
+
+___
+
+## Description
+##### This is a repository for creating a simple 'Contact Book' application for a test task for Alas d.o.o.
+
+
+## License
+- Apache License 
+- ##### [Read more about licenses](https://github.com/mifa43/test-repetition/blob/main/LICENSE)
