@@ -48,4 +48,14 @@ ___
 
 ## Usage
 
-- <http://localhost:8001> (Access the application.)
+- <http://localhost:8001> - (Access the application).
+
+### Admin
+
+- <http://localhost:8001/admin> - (Access the admin panel).
+
+> #### login as admin
+
+    Username: admin1
+    Password: mypassword1
+    
