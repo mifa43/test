@@ -45,3 +45,7 @@ ___
 > ##### If it is necessary to call some of the django-admin commands, this can be done with the accompanying command.
 
     docker exec -it DjangoTest /bin/bash
+
+## Usage
+
+- <http://localhost:8001> (Access the application.)
