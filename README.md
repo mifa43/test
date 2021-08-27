@@ -12,7 +12,7 @@
     - [Register](#Register)
     - [Login](#Login)
     - [Add-contact](#Add-contact)
-    - [List of all contacts](#List-of-contacts)
+    - [List of contacts](#List-of-contacts)
     - [Delete](#Delete)
     - [Update-contact](#Update-contact)
     - [Filters](#Filters)
@@ -71,6 +71,6 @@ ___
 
 > To create a contact, it is necessary to fill in the fields and add a contact by pressing the button.
 
-### List of all contacts
+### List of contacts
 
 > To view your contact list, tap contacts in the navigation bar and a contact information tab will be displayed
