@@ -94,3 +94,7 @@ ___
 ### Home
 
 > Pressing home will return to your home page.
+
+### Contact
+
+- **Email**: [Milos Zlatkovic](mailto:milos.zlatkovic.it@gmail.com?subject=[GitHub]%20Source%20Han%20Sans)
