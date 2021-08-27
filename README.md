@@ -80,3 +80,17 @@ ___
 > Above the contact card is an option to filter the contact by date, this option will sort your contacts from younger to older.
 
 ### Update-contact
+
+> In order to access the section for changing contacts, you need to press the contacts in the navigation bar, in the tab of the contact you want to change, there is an inscription 'changes'.
+
+> **Note**: Gender is the default value.
+
+### Delete
+
+> To access the section to delete a contact open the contact list in the contact card there is a delete option that will permanently delete your contact.
+
+> **Note**: This function will set the active field to false, thus enabling the contact not to be displayed.
+
+### Home
+
+> Pressing home will return to your home page.
