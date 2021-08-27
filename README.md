@@ -97,4 +97,4 @@ ___
 
 ### Contact
 
-- **Email**: [Milos Zlatkovic](mailto:milos.zlatkovic.it@gmail.com?subject=[GitHub]%20Source%20Han%20Sans)
+- **Email**: [Milos Zlatkovic](mailto:milos.zlatkovic.it@gmail.com?subject=milos.zlatkovic.it@gmail.com)
