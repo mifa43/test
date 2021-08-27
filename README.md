@@ -24,7 +24,7 @@
 ___
 
 ## Description
-##### This is a repository for creating a simple 'Contact Book' application for a test task for Alas d.o.o.
+##### This is a repository for creating a simple 'Contact Book' application for a test task for ALAS d.o.o.
 
 
 ## License
