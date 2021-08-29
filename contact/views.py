@@ -41,8 +41,8 @@ def update_contact(response, id):
         if form.is_valid(): # validate form
             name, birth_date, first_name, last_name, phone_number = form.cleaned_data['name'], form.cleaned_data['birthDate'], form.cleaned_data['firstName'], form.cleaned_data['lastName'], form.cleaned_data['phoneNumber']
             gender = form.cleaned_data['gender']
-            atr = response.POST.get('dropdown')
-            # gender = dict(form.fields['gender'].choices)[gender]
+            atr = response.POST.get('dropdown') #we capture the value from the select option
+            # gender = dict(form.fields['gender'].choices)[gender] # commited just in case 
             if name and gender and birth_date and first_name and last_name and phone_number:    #update only if each field filled
                 update = AdressEntery.objects.filter(id=id).update(name=name, gender=gender.upper(), birthDate=birth_date)
                 update_rel = AdressEntery.objects.get(id=id)
@@ -58,14 +58,16 @@ def update_contact(response, id):
             update = AdressEntery.objects.get(id=id)
             
             if len(update.gender) >= 1: #no solution has been found.. So when changing the male gender is considered the default
+                #each option has its own number, one of the options will always be the default-
+                # (depending on the value in the database) and each number represents the way the gender is displayed
                 x_gender = atr
-                if x_gender == "1":
+                if x_gender == "1": #if the card is female, number 1 is assumed to be female and number two is male
                     update = AdressEntery.objects.filter(id=id).update(gender="Famele".upper())
                 elif x_gender == "2":
                     update = AdressEntery.objects.filter(id=id).update(gender="Male".upper())
                 elif x_gender == "3":
                     update = AdressEntery.objects.filter(id=id).update(gender="Male".upper())
-                elif x_gender == "4":
+                elif x_gender == "4":   #if the card is male the number 3 is assumed to be male and the number 4 is female
                     update = AdressEntery.objects.filter(id=id).update(gender="Famele".upper())
             # else:
             #     update = AdressEntery.objects.get(id=id)
