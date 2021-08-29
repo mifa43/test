@@ -7,7 +7,7 @@ Edit contact
     <h3>Edit contact</h3>
     <!-- Displaying contact card for update -->
     <div class="input-group-text">
-        <form method="POST", class="form-group">
+        <form method="POST", class="form-group", action="http://localhost:8001/api/update-contact/{{id}}">
             <!-- displaying form fields -->
             {% csrf_token %}
             <input type="text" name="name" value="{{auto.name}}"><br>
@@ -20,7 +20,16 @@ Edit contact
             <br>
             <input type="number" name="phoneNumber" value="{{contact.phoneNumber}}"><br>
             <br>
-            <p>{{form.gender}}<smal style="font-size: smaller;"> default*</small></p><br>
+            <select id='dropdown' name="dropdown">
+                {% if auto.gender == "FAMELE" %}
+                    <option value="1" selected>Famele</option>
+                    <option value="2">Male</option>
+                {% else %}
+                    <option value="3" selected>Mele</option>
+                    <option value="4">Famele</option>
+                {% endif %}
+            </select>
+            <!-- <p>{{form.gender.0}}<smal style="font-size: smaller;"> default*</small></p><br> -->
             <br>
             {{ adressentery.get_gender_display }}<br>
             
