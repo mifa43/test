@@ -31,6 +31,6 @@ urlpatterns = [
     path('register/', vis.register, name='register'),
     path('', include('django.contrib.auth.urls')),
     path('', views.redirect, name='redirect'),
-    url(r'^favicon\.ico$',RedirectView.as_view(url='/static/images/favicon.ico')),
+    url(r'^favicon\.ico$',RedirectView.as_view(url='/static/favicon.ico')),
 
 ]
