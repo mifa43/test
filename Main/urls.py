@@ -16,10 +16,11 @@ from django.contrib import admin
 from contact import views
 from django.conf.urls import url
 from django.urls import path
+
 #paths and links in the web application
 urlpatterns = [
+    
+    path("api/contact-list/", views.GetListOfContacts.as_view(), name="contact-list"),
+    path("", views.Home.as_view(), name="home"),
     path('admin/', admin.site.urls),
-    url(r"^api/contact-list/$", views.GetListOfContacts.as_view(), name="contact-list"),
-    url(r"^$", views.Home.as_view(), name="home"),
-
 ]
