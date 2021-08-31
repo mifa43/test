@@ -11,3 +11,9 @@ class GetListOfContacts(View):
         contact_list = AdressEntery.objects.all()
         counter_for_active = AdressEntery.objects.filter(active=True).count()
         return render(request, "main/contact_list.html", {"contact_list": contact_list, "counter": counter_for_active})
+
+class FilterContacts(View):
+    def get(self, request):
+        filter = AdressEntery.objects.filter()
+        counter_for_active = AdressEntery.objects.filter(active=True).count()
+        return render(request, "main/filter.html", {"filter": filter.order_by("-birthDate"), "counter": counter_for_active})
