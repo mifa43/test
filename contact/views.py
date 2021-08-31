@@ -7,7 +7,12 @@ from .forms import CreateContact, OptionalForm
 from contact import models
 
 # <a href="{% url 'add-contacts' %}">New contact</a>
-# <a href="{% url 'contact-list' %}">Contacts</a>       return to nav in base
+#      return to nav in base
 class Home(ListView):   # this is class and it's return home page
     model = AdressEntery    # model 
     template_name = "main/home.html"        # template
+
+class GetListOfContacts(ListView):
+    model = AdressEntery
+    template_name = "main/contact_list.html"
+    context_object_name = "contact_list"
