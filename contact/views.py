@@ -8,6 +8,6 @@ from contact import models
 
 # <a href="{% url 'add-contacts' %}">New contact</a>
 # <a href="{% url 'contact-list' %}">Contacts</a>       return to nav in base
-class Home(ListView):
-    model = AdressEntery
-    template_name = "main/home.html"
+class Home(ListView):   # this is class and it's return home page
+    model = AdressEntery    # model 
+    template_name = "main/home.html"        # template
