@@ -13,24 +13,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
 from contact import views
-from registration import views as vis
-from django.views.generic import RedirectView
 from django.conf.urls import url
 
 #paths and links in the web application
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/list-of-contacts/', views.list_of_contacts, name='list_of_contacts'),
-    path('api/list-of-contacts/delete/<int:id>', views.delete, name='delete'),
-    path('api/update-contact/<int:id>', views.update_contact, name='update_contact'),
-    path('api/add-contact/', views.add_contact, name='add_contact'),
-    path('api/list-of-contacts/filters', views.filters, name='filters'),
-    path('home/', views.home, name='home'),
-    path('register/', vis.register, name='register'),
-    path('', include('django.contrib.auth.urls')),
-    path('', views.redirect, name='redirect'),
-    url(r'^favicon\.ico$',RedirectView.as_view(url='/static/favicon.ico')),
+    url(r"^$", views.Home.as_view(), name="home")
 
 ]
