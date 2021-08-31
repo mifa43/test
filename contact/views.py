@@ -134,4 +134,4 @@ def home(response):
     return render(response, 'main/home.html', {})   #home page for navigation
 
 def redirect(response):
-   return HttpResponseRedirect("http://localhost:8001/home")    # if we type localhost:8001/ we want to redirect to home page
+   return HttpResponseRedirect("http://localhost:8001/home/")    # if we type localhost:8001/ we want to redirect to home page
