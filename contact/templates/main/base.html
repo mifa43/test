@@ -71,9 +71,9 @@
     </head>
     <body>
         <div class="sidenav">
-            <a href="/">Home page</a>
+            <a href="{% url 'home' %}">Home page</a>
             <a href="/api/add-contact/">New contact</a>
-            <a href="/api/contact-list/">Contacts</a>
+            <a href="{% url 'contact-list' %}">Contacts</a>
 
 
            
