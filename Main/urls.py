@@ -21,7 +21,7 @@ from django.urls import path
 urlpatterns = [
     # path("api/add-contacts/", views.AddContacts.as_view(), name="add-contacts"),
     # path("api/contact-list/filter/", views.FilterContacts.as_view(), name="Filter"),
-    # path("api/contact-list/", views.GetListOfContacts.as_view(), name="contact-list"),
+    path("api/contact-list/", views.GetListOfContacts.as_view(), name="contact-list"),
     path("", views.Home.as_view(), name="home"),
     path('admin/', admin.site.urls),
 ]
