@@ -9,4 +9,5 @@ class Home(View):
 class GetListOfContacts(View):
     def get(self, request):
         contact_list = AdressEntery.objects.all()
-        return render(request, "main/contact_list.html", {"contact_list": contact_list})
+        counter_for_active = AdressEntery.objects.filter(active=True).count()
+        return render(request, "main/contact_list.html", {"contact_list": contact_list, "counter": counter_for_active})
