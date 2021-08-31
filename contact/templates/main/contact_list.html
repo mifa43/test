@@ -18,7 +18,7 @@ List of contacts
             <input type="text", name="new">
     </div>
 
-    {% for i in lista.all %}
+    {% for i in contact_list %}
         {% for f in i.person_set.all %}
             {% for q in i.contact_set.all %}
                 {% if i.active == True %}
