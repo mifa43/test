@@ -5,6 +5,7 @@ from django.views import View
 from django.views.generic import ListView, UpdateView, CreateView
 from .forms import CreateContact, OptionalForm
 from contact import models
+from django.views.generic.edit import FormView
 
 # <a href="{% url 'add-contacts' %}">New contact</a>
 #      return to nav in base    <a href="{% url 'Filter' %}">
@@ -23,7 +24,9 @@ class FilterContacts(ListView):
     context_object_name = "filter"  
     ordering = "-birthDate"     #just like in old version of code ordering == order_by in methods
 
-class AddContacts(CreateView):
+class AddContacts(FormView):
+    template_name = "main/add_contact.html"
     form_class = CreateContact
-    template_name = "main/add-contact.html"
     context_object_name = "form"
+    success_url = '/api/add-contacts/'
+
