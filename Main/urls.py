@@ -15,9 +15,10 @@ Including another URLconf
 from django.contrib import admin
 from contact import views
 from django.conf.urls import url
-
+from django.urls import path
 #paths and links in the web application
 urlpatterns = [
-    url(r"^$", views.Home.as_view(), name="home")
+    path('admin/', admin.site.urls),
+    url(r"^$", views.Home.as_view(), name="home"),
 
 ]
