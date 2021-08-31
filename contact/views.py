@@ -16,3 +16,7 @@ class GetListOfContacts(ListView):
     model = AdressEntery
     template_name = "main/contact_list.html"
     context_object_name = "contact_list" #  this will overwrite variabl in html. on first place is something_list
+
+class FilterContacts(ListView):
+    model = AdressEntery
+    template_name = "main/filter.html"
