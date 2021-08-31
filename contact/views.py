@@ -7,8 +7,6 @@ from .forms import CreateContact, OptionalForm
 from contact import models
 from django.views.generic.edit import FormView
 
-# <a href="{% url 'add-contacts' %}">New contact</a>
-#      return to nav in base    <a href="{% url 'Filter' %}">
 class Home(ListView):   # this is class and it's return home page
     model = AdressEntery    # model 
     template_name = "main/home.html"        # template
