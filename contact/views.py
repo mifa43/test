@@ -20,3 +20,5 @@ class GetListOfContacts(ListView):
 class FilterContacts(ListView):
     model = AdressEntery
     template_name = "main/filter.html"
+    context_object_name = "filter"
+    ordering = "-birthDate"
