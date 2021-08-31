@@ -71,14 +71,10 @@
     </head>
     <body>
         <div class="sidenav">
-            <a href="/home/">Home page</a>
-            <a href="/api/add-contact/">New contact</a>
-            <a href="/api/list-of-contacts/">Contacts</a>
-            {% if user.is_authenticated %}  
-                <a href="/logout">Logout</a>
-            {% else %}
-                <a href="/login">Login</a>
-            {% endif %}
+            <!-- this method reads the declared name in our url.py. -->
+            <a href="{% url 'home' %}">Home page</a>
+            
+
 
            
         </div>
@@ -87,21 +83,10 @@
                 <div class="col-8">
                     <h1 class="mt-2">Contact book</h1>
                     <hr class="mt-0 mb-4">
-                    {% if user.is_authenticated %}  
-                    <!-- checking if the user exists if he does not exist we require him to log in and if he does not have an account we offer to register -->
-                        
-                        {% block content %}
-                        {% endblock %}
-                    {% else %}
-                        <p>Login <a href="/login">here</a></p>
-                    {% endif %}
                     
-
-                    {% block register %}
+                    {% block content %}
                     {% endblock %}
-                    <!-- only registration and login for non-registered users is allowed -->
-                    {% block login_required %}
-                    {% endblock %}
+               
            
                 </div>
             </div>

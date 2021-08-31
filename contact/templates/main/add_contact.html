@@ -7,7 +7,7 @@ Create new contact
 {% block content %}
     <h3>Create page</h3>
     <div class="input-group-text">
-        <form method="POST", class="form-group">
+        <form action="" method="POST", class="form-group">
             {% csrf_token %}
             {{form.name}}<br>
             <br>
@@ -24,7 +24,7 @@ Create new contact
             {{ adressentery.get_gender_display }}<br>
             
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
+                <div class="input-group-prepend" style="margin: 0 auto;">
                     <button type="submit", name="create", class="btn btn-success">Add contact</button>
                 </div>
             </div>
