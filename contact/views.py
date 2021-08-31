@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import AdressEntery, Person, Contact
 from django.views import View
+from .forms import CreateContact, OptionalForm
 
 class Home(View):
     template_name ="main/home.html"
@@ -23,3 +24,11 @@ class FilterContacts(View):
         filter = AdressEntery.objects.filter()
         counter_for_active = AdressEntery.objects.filter(active=True).count()
         return render(request, self.template_name, {"filter": filter.order_by("-birthDate"), "counter": counter_for_active})
+
+class AddContacts(View):
+    template_name = "main/add_contact.html"
+    form = CreateContact
+
+    def get(self, request):
+        
+        return render(request, self.template_name, {"form": self.form})
