@@ -7,7 +7,7 @@ Create new contact
 {% block content %}
     <h3>Create page</h3>
     <div class="input-group-text">
-        <form method="POST", class="form-group">
+        <form action="" method="POST", class="form-group">
             {% csrf_token %}
             {{form.name}}<br>
             <br>
