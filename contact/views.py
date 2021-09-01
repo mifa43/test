@@ -59,7 +59,6 @@ class DeleteContact(ListView):
     model = AdressEntery
     template_name = "main/contact_list.html" 
     context_object_name = "contact"
-    success_url = "/api/contact-list/"
     def get_queryset(self, *args, **kwargs):
         queryset = super(DeleteContact, self).get_queryset()
         return queryset.filter(id=self.kwargs['pk']).update(active=False)
