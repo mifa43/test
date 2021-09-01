@@ -63,9 +63,9 @@ List of contacts
                             }
                             }          
                                                                                       
-                        </script> commented js function --> 
+                        </script> commented js function       /api/contact-list/delete/{{i.id}}--> 
                         
-                        <a href="/api/contact-list/delete/{{i.id}}"  style="text-decoration: none;">Delete</a>
+                        <a href="{% url 'delete' pk=i.id%}"  style="text-decoration: none;">Delete</a>
                     </div> <br>
                 {% endif %}
             {% endfor %}
