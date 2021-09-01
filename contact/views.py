@@ -17,7 +17,6 @@ class GetListOfContacts(ListView):
     template_name = "main/contact_list.html"
     def get_queryset(self):
         queryset = super(GetListOfContacts, self).get_queryset()
-        #your condition here.
         return queryset.filter(active=True, user=self.request.user)
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -55,10 +54,11 @@ class AddContacts(FormView):
             request.user.adressentery.add(add)  # request current loged user
             return redirect("/api/add-contacts/")   # redirect after button presed and its valid form
         return super().post(request)
-class DeleteContact():
+
+class DeleteContact(ListView):
     template_name = "main/contact_list.html" 
+    context_object_name = "contact"
     success_url = "/api/contact-list/"
-    def get_queryset(self, id):
-        queryset = super(GetListOfContacts, self).get_queryset()
-        #your condition here.
-        return queryset
+    def get_queryset(self, *args, **kwargs):
+        
+        return AdressEntery.objects.filter(id=self.kwargs['pk']).update(active=False)
