@@ -41,7 +41,7 @@ class AddContacts(FormView):
     template_name = "main/add_contact.html"
     form_class = CreateContact  # call form
     context_object_name = "form" # html variabl form
-    success_url = '/api/add-contacts/'  # redirect
+    success_url = "/api/add-contacts/"  # redirect
     def post(self, request):
         form = CreateContact(request.POST)  # requesting post method
         if form.is_valid(): # check form fields return true 
@@ -55,3 +55,10 @@ class AddContacts(FormView):
             request.user.adressentery.add(add)  # request current loged user
             return redirect("/api/add-contacts/")   # redirect after button presed and its valid form
         return super().post(request)
+class DeleteContact():
+    template_name = "main/contact_list.html" 
+    success_url = "/api/contact-list/"
+    def get_queryset(self, id):
+        queryset = super(GetListOfContacts, self).get_queryset()
+        #your condition here.
+        return queryset
