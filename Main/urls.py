@@ -16,7 +16,7 @@ from django.contrib import admin
 from contact import views
 from django.conf.urls import url
 from django.urls import path
-
+from django.views.generic import RedirectView
 #paths and links in the web application
 urlpatterns = [
     path("api/contact-list/delete/<int:pk>", views.DeleteContact.as_view(), name="delete"),
