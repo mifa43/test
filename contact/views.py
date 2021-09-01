@@ -62,6 +62,4 @@ class DeleteContact(ListView):
     success_url = "/api/contact-list/"
     def get_queryset(self, *args, **kwargs):
         queryset = super(DeleteContact, self).get_queryset()
-        if not queryset:
-            return redirect("/api/contact-list/")
         return queryset.filter(id=self.kwargs['pk']).update(active=False)
