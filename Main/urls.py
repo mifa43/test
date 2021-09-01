@@ -19,6 +19,7 @@ from django.urls import path
 
 #paths and links in the web application
 urlpatterns = [
+    path("api/contact-list/delete/<int:id>", views.DeleteContact.as_view(), name="delete"),
     path("api/add-contacts/", views.AddContacts.as_view(), name="add-contacts"),
     path("api/contact-list/filter/", views.FilterContacts.as_view(), name="Filter"),
     path("api/contact-list/", views.GetListOfContacts.as_view(), name="contact-list"),
