@@ -13,21 +13,35 @@ class Home(ListView):   # this is class and it's return home page
 
 class GetListOfContacts(ListView):
     model = AdressEntery
-    template_name = "main/contact_list.html"
     context_object_name = "contact_list" #  this will overwrite variabl in html. on first place is something_list
+    template_name = "main/contact_list.html"
+    def get_queryset(self):
+        queryset = super(GetListOfContacts, self).get_queryset()
+        #your condition here.
+        return queryset.filter(active=True, user=self.request.user)
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['counter'] = self.get_queryset().count()
+        return context
 
 class FilterContacts(ListView):
     model = AdressEntery
     template_name = "main/filter.html"
     context_object_name = "filter"  
     ordering = "-birthDate"     #just like in old version of code ordering == order_by in methods
+    def get_queryset(self): # query instance
+        queryset = super(FilterContacts, self).get_queryset()   # super used to find the "parent class" and return its object
+        return queryset.filter(active=True, user=self.request.user) # return query set as filtrered data
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs) # when we said super().get_context_data(*args, **kwargs) inherits from get_context_data use ctrl + left click and see where it will take you
+        context['counter'] = self.get_queryset().count()    # context['counter'] this is similar to what we used: return render(request, template, {"var": var})
+        return context  # and pass to template
 
 class AddContacts(FormView):
     template_name = "main/add_contact.html"
     form_class = CreateContact  # call form
     context_object_name = "form" # html variabl form
     success_url = '/api/add-contacts/'  # redirect
-
     def post(self, request):
         form = CreateContact(request.POST)  # requesting post method
         if form.is_valid(): # check form fields return true 
