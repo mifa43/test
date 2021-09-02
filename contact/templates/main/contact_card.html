@@ -10,7 +10,7 @@ Edit contact
         <form method="POST", class="form-group", action="http://localhost:8001/api/update-contact/{{id}}">
             <!-- displaying form fields -->
             {% csrf_token %}
-            <input type="text" name="name" value="{{auto.name}}"><br>
+            <input type="text" name="name" value="{{a.name}}"><br>
             <br>
             <input type="date" name="birthDate" value="{{auto.birthDate}}"><br>
             <br>
