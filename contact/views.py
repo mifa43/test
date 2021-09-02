@@ -5,7 +5,6 @@ from django.views import View
 from django.views.generic import ListView, UpdateView, CreateView
 from .forms import CreateContact, OptionalForm
 from django.views.generic.edit import FormView
-
 class Home(ListView):   # this is class and it's return home page
     model = AdressEntery    # model 
     template_name = "main/home.html"        # template
@@ -67,7 +66,17 @@ class DeleteContact(ListView):
         return redirect('/api/contact-list/')
 
 class UpdateContact(UpdateView):
-    pass
+    model = AdressEntery
+    fields = ("name", "gender", "birthDate")
+    context_object_name = "auto"
+    template_name = "main/contact_card.html"
+    def get(self, request,*args,**kwargs):
+        a  = AdressEntery.objects.get(id=self.kwargs['pk'])
+        person = a.person_set.get(person_id=self.kwargs['pk'])
+        contact = a.contact_set.get(contact_id=self.kwargs['pk'])
+        return render(request, self.template_name, {"a": a,"person": person, "contact": contact})
+
+    
 
 #region docs
 #1. allow_empty:
