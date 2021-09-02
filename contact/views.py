@@ -67,7 +67,7 @@ class DeleteContact(ListView):
 
 class UpdateContact(UpdateView):
     model = AdressEntery
-    fields = ("name", "gender", "birthDate")
+    #fields = ("name", "gender", "birthDate")
     context_object_name = "auto"
     template_name = "main/contact_card.html"
     def get(self, request,*args,**kwargs):
@@ -75,8 +75,6 @@ class UpdateContact(UpdateView):
         person = a.person_set.get(person_id=self.kwargs['pk'])
         contact = a.contact_set.get(contact_id=self.kwargs['pk'])
         return render(request, self.template_name, {"a": a,"person": person, "contact": contact})
-
-    
 
 #region docs
 #1. allow_empty:
