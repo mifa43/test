@@ -19,7 +19,7 @@ from django.urls import path
 from django.views.generic import RedirectView
 #paths and links in the web application
 urlpatterns = [
-    path("api/contact-list/update-contact/<int:pk>", views.UpdateContact.as_view(), name="update"),
+    path("api/update-contact/<int:pk>", views.UpdateContact.as_view(), name="update"),
     path("api/contact-list/delete/<int:pk>", views.DeleteContact.as_view(), name="delete"),
     path("api/add-contacts/", views.AddContacts.as_view(), name="add-contacts"),
     path("api/contact-list/filter/", views.FilterContacts.as_view(), name="Filter"),
