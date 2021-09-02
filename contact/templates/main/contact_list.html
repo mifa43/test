@@ -50,7 +50,7 @@ List of contacts
                                 color: black;
                             }
                         </style>
-                        <a href="/api/update-contact/{{i.id}}" style="text-decoration: none;">Changes</a>
+                        <a href="{% url 'update' pk=i.id%}" style="text-decoration: none;">Changes</a>
                         <!-- <script type="text/javascript">
                             
                             function clicked() {
