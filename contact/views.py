@@ -66,7 +66,8 @@ class DeleteContact(ListView):
         super(DeleteContact, self).dispatch(request)  #dispatch method will override the second method and allow us to do redirection
         return redirect('/api/contact-list/')
 
-
+class UpdateContact(UpdateView):
+    pass
 
 #region docs
 #1. allow_empty:
