@@ -51,7 +51,7 @@ List of contacts
                         </style>
                         <a href="/api/update-contact/{{i.id}}" style="text-decoration: none;">Changes</a>
                         
-                        <a href="/api/list-of-contacts/delete/{{i.id}}"  style="text-decoration: none;">Delete</a>
+                        <a href="{% url 'delete' pk=i.id%}"  style="text-decoration: none;">Delete</a>
                     </div> <br>
                 {% endif %}
             {% endfor %}
