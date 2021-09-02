@@ -4,7 +4,6 @@ from .models import AdressEntery, Person, Contact
 from django.views import View
 from django.views.generic import ListView, UpdateView, CreateView
 from .forms import CreateContact, OptionalForm
-from contact import models
 from django.views.generic.edit import FormView
 
 class Home(ListView):   # this is class and it's return home page
@@ -17,7 +16,6 @@ class GetListOfContacts(ListView):
     template_name = "main/contact_list.html"
     def get_queryset(self):
         queryset = super(GetListOfContacts, self).get_queryset()
-        #your condition here.
         return queryset.filter(active=True, user=self.request.user)
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -41,7 +39,7 @@ class AddContacts(FormView):
     template_name = "main/add_contact.html"
     form_class = CreateContact  # call form
     context_object_name = "form" # html variabl form
-    success_url = '/api/add-contacts/'  # redirect
+    success_url = "/api/add-contacts/"  # redirect
     def post(self, request):
         form = CreateContact(request.POST)  # requesting post method
         if form.is_valid(): # check form fields return true 
@@ -55,3 +53,27 @@ class AddContacts(FormView):
             request.user.adressentery.add(add)  # request current loged user
             return redirect("/api/add-contacts/")   # redirect after button presed and its valid form
         return super().post(request)
+
+class DeleteContact(ListView):
+    model = AdressEntery
+    allow_empty = False
+    template_name = "main/contact_list.html" 
+    context_object_name = "contact"
+    def get_queryset(self, *args, **kwargs):
+        queryset = super(DeleteContact, self).get_queryset()
+        return queryset.filter(id=self.kwargs['pk']).update(active=False)   # filter by clicked contact card get id and set active false
+    def dispatch(self,request, *args, **kwargs):   #this method allows us to use methods such as (post, get, put ..) and allows us to return HTTP methods such as (response, redirect)
+        super(DeleteContact, self).dispatch(request)  #dispatch method will override the second method and allow us to do redirection
+        return redirect('/api/contact-list/')
+
+
+
+#region docs
+#1. allow_empty:
+#A boolean specifying whether to display the page if no objects are available. 
+#If this is False and no objects are available, the view will raise a 404 instead of displaying an empty page. By default, this is True.
+
+#2.read more about this dispatch:
+# https://docs.djangoproject.com/en/3.2/ref/class-based-views/base/#django.views.generic.base.View.dispatch
+# https://stackoverflow.com/questions/47808652/what-is-dispatch-used-for-in-django/47808940
+#endregion
