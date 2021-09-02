@@ -4,7 +4,6 @@ from .models import AdressEntery, Person, Contact
 from django.views import View
 from django.views.generic import ListView, UpdateView, CreateView
 from .forms import CreateContact, OptionalForm
-from contact import models
 from django.views.generic.edit import FormView
 
 class Home(ListView):   # this is class and it's return home page
@@ -57,8 +56,24 @@ class AddContacts(FormView):
 
 class DeleteContact(ListView):
     model = AdressEntery
+    allow_empty = False
     template_name = "main/contact_list.html" 
     context_object_name = "contact"
     def get_queryset(self, *args, **kwargs):
         queryset = super(DeleteContact, self).get_queryset()
         return queryset.filter(id=self.kwargs['pk']).update(active=False)
+    def dispatch(self,request, *args, **kwargs):   #this method allows us to use methods such as (post, get, put ..) and allows us to return HTTP methods such as (response, redirect)
+        super(DeleteContact, self).dispatch(request)  
+        return redirect('/api/contact-list/')
+
+
+
+#region docs
+#1. allow_empty:
+#A boolean specifying whether to display the page if no objects are available. 
+#If this is False and no objects are available, the view will raise a 404 instead of displaying an empty page. By default, this is True.
+
+#2.read more about this dispatch:
+# https://docs.djangoproject.com/en/3.2/ref/class-based-views/base/#django.views.generic.base.View.dispatch
+# https://stackoverflow.com/questions/47808652/what-is-dispatch-used-for-in-django/47808940
+#endregion
