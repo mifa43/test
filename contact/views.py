@@ -56,7 +56,7 @@ class UpdateContact(UpdateView):
     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
     context_object_name = "form"
     template_name = "main/add_contact.html"
-    success_url = "http://localhost:8001/api/contact-list/"
+    success_url = "/api/contact-list/"
 
 #region docs
 #1.read more about this dispatch:
