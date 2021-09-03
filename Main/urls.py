@@ -18,15 +18,18 @@ from django.conf.urls import url
 from django.urls import path, include
 from django.views.generic import RedirectView
 from registration import views as vis
+from django.contrib.auth.decorators import login_required
 #paths and links in the web application
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path("register/", vis.Register.as_view(), name="register" ),
-    path("api/update-contact/<int:pk>", views.UpdateContact.as_view(), name="update"),
-    path("api/contact-list/delete/<int:pk>", views.DeleteContact.as_view(), name="delete"),
-    path("api/add-contacts/", views.AddContacts.as_view(), name="add-contacts"),
-    path("api/contact-list/filter/", views.FilterContacts.as_view(), name="Filter"),
-    path("api/contact-list/", views.GetListOfContacts.as_view(), name="contact-list"),
-    path("", views.Home.as_view(), name="home"),
+    path("api/update-contact/<int:pk>", login_required(views.UpdateContact.as_view()), name="update"),
+    path("api/contact-list/delete/<int:pk>", login_required(views.DeleteContact.as_view()), name="delete"),
+    path("api/add-contacts/", login_required(views.AddContacts.as_view()), name="add-contacts"),
+    path("api/contact-list/filter/", login_required(views.FilterContacts.as_view()), name="Filter"),
+    path("api/contact-list/", login_required(views.GetListOfContacts.as_view()), name="contact-list"),
+    path("", login_required(views.Home.as_view()), name="home"),
     path('admin/', admin.site.urls),
 ]
+
+# For login_required - if the user is not logged in and tries to access the protected page login_required will reject it and request login
