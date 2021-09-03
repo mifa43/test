@@ -1,10 +1,11 @@
 from django.http import request
 from django.shortcuts import redirect, render
-from .models import AdressEntery, Person, Contact
+from .models import AdressEntery
 from django.views import View
 from django.views.generic import ListView, UpdateView, CreateView
-from .forms import CreateContact, OptionalForm
+from .forms import CreateContact, AdressForm
 from django.views.generic.edit import FormView
+
 class Home(ListView):   # this is class and it's return home page
     model = AdressEntery    # model 
     template_name = "main/home.html"        # template
@@ -34,24 +35,16 @@ class FilterContacts(ListView):
         context['counter'] = self.get_queryset().count()    # context['counter'] this is similar to what we used: return render(request, template, {"var": var})
         return context  # and pass to template
 
-class AddContacts(FormView):
+class AddContacts(CreateView):
+    model = AdressEntery
+    fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
     template_name = "main/add_contact.html"
-    form_class = CreateContact  # call form
+    # form_class = CreateContact  # call form
     context_object_name = "form" # html variabl form
     success_url = "/api/add-contacts/"  # redirect
-    def post(self, request):
-        form = CreateContact(request.POST)  # requesting post method
-        if form.is_valid(): # check form fields return true 
-            name, birth_date, first_name, last_name, phone_number = form.cleaned_data['name'], form.cleaned_data['birthDate'], form.cleaned_data['firstName'], form.cleaned_data['lastName'], form.cleaned_data['phoneNumber']
-            gender = form.cleaned_data['gender']    # get data from form field
-            gender = dict(form.fields['gender'].choices)[gender]
-            add = AdressEntery(name=name, gender=gender.upper(), birthDate=birth_date)  # add values to db
-            add.save()
-            add.person_set.create(firstName=first_name, lastName=last_name)
-            add.contact_set.create(phoneNumber=phone_number)
-            request.user.adressentery.add(add)  # request current loged user
-            return redirect("/api/add-contacts/")   # redirect after button presed and its valid form
-        return super().post(request)
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(AddContacts, self).form_valid(form)
 
 class DeleteContact(ListView):
     model = AdressEntery
