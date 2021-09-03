@@ -19,8 +19,6 @@ List of contacts
     </div>
     <!-- /api/contact-list/filter/ -->
     {% for i in contact_list %}
-        {% for f in i.person_set.all %}
-            {% for q in i.contact_set.all %}
                 {% if i.active == True %}
                     <div class="input-group-text">
                         {% if i.gender == "MALE"%}
@@ -35,9 +33,9 @@ List of contacts
                             <p style="font-size: smaller;">Name: <strong>{{i.name}}</strong></p>
                             <p style="text-transform:lowercase">Gender: <strong>{{i.gender}}</strong></p>
                             <p style="font-size: smaller;">Birthday: <strong>{{i.birthDate}}</strong></p>
-                            <p style="font-size: smaller;">First name: <strong>{{f.firstName}}</strong></p>
-                            <p style="font-size: smaller;">Last name: <strong>{{f.lastName}}</strong></p>
-                            <p style="font-size: smaller;">Phone number: <strong>{{q.phoneNumber}}</strong></p>
+                            <p style="font-size: smaller;">First name: <strong>{{i.firstName}}</strong></p>
+                            <p style="font-size: smaller;">Last name: <strong>{{i.lastName}}</strong></p>
+                            <p style="font-size: smaller;">Phone number: <strong>{{i.phoneNumber}}</strong></p>
                         </div>
                             
                     </div> 
@@ -67,8 +65,6 @@ List of contacts
                         <a href="{% url 'delete' pk=i.id%}"  style="text-decoration: none;">Delete</a>
                     </div> <br>
                 {% endif %}
-            {% endfor %}
-        {% endfor %}
     {% endfor %}
   
     
