@@ -9,19 +9,8 @@ Create new contact
     <div class="input-group-text">
         <form action="" method="POST", class="form-group">
             {% csrf_token %}
-            {{form.name}}<br>
-            <br>
-            {{form.birthDate}}<br>
-            <br>
-            {{form.firstName}}<br>
-            <br>
-            {{form.lastName}}<br>
-            <br>
-            {{form.phoneNumber}}<br>
-            <br>
-            {{form.gender}}<br>
-            <br>
-            {{ adressentery.get_gender_display }}<br>
+            {{form.as_p}}<br>
+          
             
             <div class="input-group mb-3">
                 <div class="input-group-prepend" style="margin: 0 auto;">

@@ -17,23 +17,27 @@ class AdressEntery(models.Model):
     birthDate = models.DateField(blank=True)
     active = models.BooleanField(default=True)
 
+    firstName = models.CharField(max_length = 120, default=None)
+    lastName = models.CharField(max_length = 120, default=None)
+    phoneNumber = models.IntegerField(default=None)
+
     def __str__(self):
         return self.name
 
-class Person(models.Model):
-    person = models.ForeignKey(AdressEntery, on_delete=models.CASCADE)
-    firstName = models.CharField(max_length = 120)
-    lastName = models.CharField(max_length = 120)
+# class Person(models.Model):
+#     person = models.ForeignKey(AdressEntery, on_delete=models.CASCADE)
+#     firstName = models.CharField(max_length = 120)
+#     lastName = models.CharField(max_length = 120)
 
-    def __str__(self):
-        return str(self.person)
+#     def __str__(self):
+#         return str(self.person)
 
-class Contact(models.Model):
-    contact = models.ForeignKey(AdressEntery, on_delete=models.CASCADE)
-    phoneNumber = models.IntegerField()
+# class Contact(models.Model):
+#     contact = models.ForeignKey(AdressEntery, on_delete=models.CASCADE)
+#     phoneNumber = models.IntegerField()
 
-    def __str__(self):
-        return str(self.contact)
+#     def __str__(self):
+#         return str(self.contact)
     #region fix
     # This is the way we display our data from the table located in the admin panel,
     #  and the shell in the docker container will not be returned to us anymore (table name objects (1))
