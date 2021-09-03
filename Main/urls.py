@@ -15,10 +15,13 @@ Including another URLconf
 from django.contrib import admin
 from contact import views
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import RedirectView
+from registration import views as vis
 #paths and links in the web application
 urlpatterns = [
+    path('', include('django.contrib.auth.urls')),
+    path("register/", vis.Register.as_view(), name="register" ),
     path("api/update-contact/<int:pk>", views.UpdateContact.as_view(), name="update"),
     path("api/contact-list/delete/<int:pk>", views.DeleteContact.as_view(), name="delete"),
     path("api/add-contacts/", views.AddContacts.as_view(), name="add-contacts"),
