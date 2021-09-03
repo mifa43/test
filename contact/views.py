@@ -1,16 +1,16 @@
+from django import views
 from django.http import request
 from django.shortcuts import redirect, render
 from .models import AdressEntery
 from django.views import View
-from django.views.generic import ListView, UpdateView, CreateView
-from .forms import CreateContact, AdressForm
-from django.views.generic.edit import FormView
+from django.views.generic import ListView, UpdateView, CreateView, DeleteView
+from django.urls import reverse_lazy
 
 class Home(ListView):   # this is class and it's return home page
     model = AdressEntery    # model 
     template_name = "main/home.html"        # template
 
-class GetListOfContacts(ListView):
+class GetListOfContacts(ListView):  # return all contacts for current user
     model = AdressEntery
     context_object_name = "contact_list" #  this will overwrite variabl in html. on first place is something_list
     template_name = "main/contact_list.html"
@@ -39,35 +39,24 @@ class AddContacts(CreateView):
     model = AdressEntery
     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
     template_name = "main/add_contact.html"
-    # form_class = CreateContact  # call form
     context_object_name = "form" # html variabl form
     success_url = "/api/add-contacts/"  # redirect
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(AddContacts, self).form_valid(form)
 
-class DeleteContact(ListView):
+class DeleteContact(DeleteView):
     model = AdressEntery
-    allow_empty = False
-    template_name = "main/contact_list.html" 
-    context_object_name = "contact"
-    def get_queryset(self, *args, **kwargs):
-        queryset = super(DeleteContact, self).get_queryset()
-        return queryset.filter(id=self.kwargs['pk']).update(active=False)   # filter by clicked contact card get id and set active false
-    def dispatch(self,request, *args, **kwargs):   #this method allows us to use methods such as (post, get, put ..) and allows us to return HTTP methods such as (response, redirect)
-        super(DeleteContact, self).dispatch(request)  #dispatch method will override the second method and allow us to do redirection
-        return redirect('/api/contact-list/')
-
+    context_object_name = "obj"
+    template_name = "main/adressentery_confirm_delete.html"
+    success_url = reverse_lazy("contact-list")
+   
 class UpdateContact(UpdateView):
     model = AdressEntery
-    #fields = ("name", "gender", "birthDate")
-    context_object_name = "auto"
-    template_name = "main/contact_card.html"
-    def get(self, request,*args,**kwargs):
-        a  = AdressEntery.objects.get(id=self.kwargs['pk'])
-        person = a.person_set.get(person_id=self.kwargs['pk'])
-        contact = a.contact_set.get(contact_id=self.kwargs['pk'])
-        return render(request, self.template_name, {"a": a,"person": person, "contact": contact})
+    fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
+    context_object_name = "form"
+    template_name = "main/add_contact.html"
+    success_url = "http://localhost:8001/api/contact-list/"
 
 #region docs
 #1. allow_empty:
