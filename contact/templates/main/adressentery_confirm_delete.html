@@ -3,13 +3,24 @@
 {% block breadcrumb %}{{ block.super }} > Admin page > Confirm delete{% endblock %}
 
 {% block content %}
+<style>
+.test{
+display: inline;
+}
+a:link {
+  text-decoration: none;
+
+}
+    
+</style>
     <div class="form" style="text-align: center;">
         <h2>Are you sure you want to delete the "<b>{{ obj.name }}</b>" contact?</h2>
-        <form action="" method="post" novalidate>
+        <form action="" method="post" novalidate class="test">
+        
             {% csrf_token %}
             <br><input class="btn btn-success" type="submit" value="Yes">
         </form>
-        <a href="{% url 'contact-list' %}"><input class="btn btn-success" type="submit" value="No"></a>
+        <a href="{% url 'contact-list' %}"><input class="btn btn-success test" type="submit" value="No"></a>
         
     </div>
     
