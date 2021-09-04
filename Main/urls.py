@@ -23,12 +23,12 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path("register/", vis.Register.as_view(), name="register" ),
-    path("api/update-contact/<int:pk>", login_required(views.UpdateContact.as_view()), name="update"),
-    path("api/contact-list/delete/<int:pk>", login_required(views.DeleteContact.as_view()), name="delete"),
-    path("api/add-contacts/", login_required(views.AddContacts.as_view()), name="add-contacts"),
-    path("api/contact-list/filter/", login_required(views.FilterContacts.as_view()), name="Filter"),
-    path("api/contact-list/", login_required(views.GetListOfContacts.as_view()), name="contact-list"),
-    path("", login_required(views.Home.as_view()), name="home"),
+    path("api/update-contact/<int:pk>", login_required(views.UpdateContact.as_view(), login_url="login"), name="update"),
+    path("api/contact-list/delete/<int:pk>", login_required(views.DeleteContact.as_view(), login_url="login"), name="delete"),
+    path("api/add-contacts/", login_required(views.AddContacts.as_view(), login_url="login"), name="add-contacts"),
+    path("api/contact-list/filter/", login_required(views.FilterContacts.as_view(), login_url="login"), name="Filter"),
+    path("api/contact-list/", login_required(views.GetListOfContacts.as_view(), login_url="login"), name="contact-list"),
+    path("", login_required(views.Home.as_view(), login_url="login"), name="home"),
     path('admin/', admin.site.urls),
 ]
 
