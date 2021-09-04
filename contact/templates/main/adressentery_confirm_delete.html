@@ -9,6 +9,8 @@
             {% csrf_token %}
             <br><input class="btn btn-success" type="submit" value="Yes">
         </form>
+        <a href="{% url 'contact-list' %}"><input class="btn btn-success" type="submit" value="No"></a>
+        
     </div>
     
 {% endblock %}
