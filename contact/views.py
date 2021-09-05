@@ -50,7 +50,12 @@ class DeleteContact(DeleteView):
     context_object_name = "obj"
     template_name = "main/adressentery_confirm_delete.html"
     success_url = reverse_lazy("contact-list")  # this is redirected to a specific url for the parameter using the name expressed in urls .py
-   
+    def dispatch(self,*args,**kwargs):
+        return super(DeleteContact, self).dispatch(*args, **kwargs)
+    def get_queryset(self):
+        queryset = super(DeleteContact, self).get_queryset()
+        return queryset.filter(id=self.kwargs['pk']).update(active=False)
+
 class UpdateContact(UpdateView):
     model = AdressEntery
     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
