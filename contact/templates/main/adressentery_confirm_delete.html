@@ -18,9 +18,9 @@ a:link {
         <form action="" method="post" novalidate class="test">
         
             {% csrf_token %}
-            <br><input class="btn btn-success" type="submit" value="Yes">
+            <br><input class="btn btn-success" id="yes" type="submit" value="Yes">
         </form>
-        <a href="{% url 'contact-list' %}"><input class="btn btn-success test" type="submit" value="No"></a>
+        <a href="{% url 'contact-list' %}"><input class="btn btn-success test" id="no" name="no" type="submit" value="No"></a>
         
     </div>
     
