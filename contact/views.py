@@ -52,13 +52,13 @@ class DeleteContact(DeleteView):
     success_url = reverse_lazy("contact-list")  # this is redirected to a specific url for the parameter using the name expressed in urls .py
     
     def dispatch(self,request, *args, **kwargs):   #this method allows us to use methods such as (post, get, put ..) and allows us to return HTTP methods such as (response, redirect)
-        super(DeleteContact, self).dispatch(request)  #dispatch method will override the second method and allow us to do redirection
-        return redirect('/api/contact-list/')   #render(request, self.template_name, {})
+        return super(DeleteContact, self).dispatch(request)  #dispatch method will override the second method and allow us to do redirection
+        #return redirect('/api/contact-list/')   #render(request, self.template_name, {})
     def get_queryset(self, *args, **kwargs):
         queryset = super(DeleteContact, self).get_queryset()
         queryset.filter(id=self.kwargs['pk']).update(active=False)
         return queryset   # filter by clicked contact card get id and set active false
-
+    
 class UpdateContact(UpdateView):
     model = AdressEntery
     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
