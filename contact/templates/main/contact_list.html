@@ -12,10 +12,16 @@ List of contacts
    
     <div class="input-group mb-3">
         <div class="input-group-prepend">
+            <input type="search", name="search" placeholder="Search"><input type="submit" name="search" class="btn btn-success">
+        </div><br>
+        
+        <div class="input-group mb-3">
+            <br>
             <a href="{% url 'Filter' %}">
-                <button type="submit" name="filter", class="btn btn-success" >Filter by date</button>        </div>
+                <button type="submit" name="filter", class="btn btn-success" >Filter by date</button>       
             </a>
-            <input type="text", name="new">
+        </div>
+
     </div>
     <!-- /api/contact-list/filter/ -->
     {% for i in contact_list %}
