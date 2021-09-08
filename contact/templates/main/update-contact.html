@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+<!-- take everything from -->
+{% block title %}
+{% load crispy_forms_tags %}
+Create new contact
+{% endblock %}
+{% block content %}
+    <h3>Create page</h3>
+    <div class="input-group-text">
+        <form action="" method="POST", class="form-group">
+            {% csrf_token %}
+            {{form|crispy}}<br>
+          
+            
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" style="margin: 0 auto;">
+                    <button type="submit", name="create", class="btn btn-success">Update contact</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
