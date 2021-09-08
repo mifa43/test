@@ -2,6 +2,7 @@
 
 <!-- take everything from -->
 {% block title %}
+{% load crispy_forms_tags %}
 Create new contact
 {% endblock %}
 {% block content %}
@@ -9,7 +10,7 @@ Create new contact
     <div class="input-group-text">
         <form action="" method="POST", class="form-group">
             {% csrf_token %}
-            {{form.as_p}}<br>
+            {{form|crispy}}<br>
           
             
             <div class="input-group mb-3">
