@@ -1,11 +1,12 @@
 from django import views
+from django.db import reset_queries
 from django.http import request
 from django.shortcuts import redirect, render
 from .models import AdressEntery
 from django.views import View
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
-
+from django.db.models import Q
 class Home(ListView):   # this is class and it's return home page
     model = AdressEntery    # model 
     template_name = "main/home.html"        # template
@@ -69,13 +70,14 @@ class UpdateContact(UpdateView):
 class SearchContact(ListView):
     model = AdressEntery
     template_name = "main/search.html"
-    context_object_name = "src"
-    def get_queryset(self, *args, **kwargs):
-        queryset = super(SearchContact, self).get_queryset()
-        print(self.kwargs['name'])
-        print(self.request.POST.get('data'))
-        queryset.filter(name=self.kwargs['name'])
-        return queryset
+    context_object_name = "result"
+    
+    def get_queryset(self):
+        query_input = self.request.GET.get('q')
+        result_obj = AdressEntery.objects.filter(Q(name__icontains=query_input))
+        return result_obj
+    
+
     # def get_context_data(self, *args, **kwargs):
     #     context = super().get_context_data(*args, **kwargs)
     #     context['counter'] = self.get_queryset().count()
