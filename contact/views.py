@@ -63,8 +63,23 @@ class UpdateContact(UpdateView):
     model = AdressEntery
     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
     context_object_name = "form"
-    template_name = "main/update-contact.html"
+    template_name = "main/add_contact.html"
     success_url = "/api/contact-list/"
+
+class SearchContact(ListView):
+    model = AdressEntery
+    template_name = "main/search.html"
+    context_object_name = "src"
+    def get_queryset(self, *args, **kwargs):
+        queryset = super(SearchContact, self).get_queryset()
+        print(self.kwargs['name'])
+        print(self.request.POST.get('data'))
+        queryset.filter(name=self.kwargs['name'])
+        return queryset
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super().get_context_data(*args, **kwargs)
+    #     context['counter'] = self.get_queryset().count()
+    #     return context
 
 #region docs
 #1.read more about this dispatch:
