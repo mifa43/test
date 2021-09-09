@@ -12,17 +12,9 @@ List of contacts
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             
-            <form action="{% url 'search' name=contact_list %}" method="">
-                {% csrf_token %}
-                <input type="text",name="data" ,name="new">
-
-            
-                
-                <button type="submit" name="search", id="search", class="btn btn-success" >Search</button>
-            
-                
-                
-            </form><br>
+            <form action="{% url 'search' %}" method="get">
+                <input name="q" type="text" placeholder="Search...">
+            </form>
             
             <a href="{% url 'Filter' %}">
                 <button type="submit" name="filter", class="btn btn-success" >Filter by date</button>        </div>
