@@ -74,8 +74,13 @@ class SearchContact(ListView):
     
     def get_queryset(self):
         query_input = self.request.GET.get('q')
-        result_obj = AdressEntery.objects.filter(Q(name__icontains=query_input))
+        result_obj = AdressEntery.objects.filter(Q(name__icontains=query_input),active=True, user=self.request.user)
         return result_obj
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['counter'] = self.get_queryset().count()
+        return context
+
     
 
     # def get_context_data(self, *args, **kwargs):
