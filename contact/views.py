@@ -50,8 +50,7 @@ class DeleteContact(DeleteView):
     model = AdressEntery
     context_object_name = "obj"
     template_name = "main/adressentery_confirm_delete.html"
-    success_url = reverse_lazy("contact-list")  # this is redirected to a specific url for the parameter using the name expressed in urls .py
-    
+    success_url = reverse_lazy("contact-list")  # this is redirected to a specific url for the parameter using the name expressed in urls .py   
     def dispatch(self,request, *args, **kwargs):   #this method allows us to use methods such as (post, get, put ..) and allows us to return HTTP methods such as (response, redirect)
         return super(DeleteContact, self).dispatch(request)  #dispatch method will override the second method and allow us to do redirection
         #return redirect('/api/contact-list/')   #render(request, self.template_name, {})
@@ -71,22 +70,15 @@ class SearchContact(ListView):
     model = AdressEntery
     template_name = "main/search.html"
     context_object_name = "result"
-    
     def get_queryset(self):
-        query_input = self.request.GET.get('q')
-        result_obj = AdressEntery.objects.filter(Q(name__icontains=query_input),active=True, user=self.request.user)
+        query_input = self.request.GET.get('q') #get form input
+        result_obj = AdressEntery.objects.filter(Q(name__icontains=query_input),active=True, user=self.request.user)    #filter user by input, active and user
+        #writing SQL queries allows the use of (&), or (|), negation (~) If the operator is not included then by default 'AND' operator is used
         return result_obj
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['counter'] = self.get_queryset().count()
+        context['counter'] = self.get_queryset().count()    # counting number of contacts in results of search
         return context
-
-    
-
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super().get_context_data(*args, **kwargs)
-    #     context['counter'] = self.get_queryset().count()
-    #     return context
 
 #region docs
 #1.read more about this dispatch:
