@@ -9,16 +9,21 @@ List of contacts
     {% else %}
         <p>Contact number: <strong>{{ counter }}</strong></p>
     {% endif %}
-   
     <div class="input-group mb-3">
         <div class="input-group-prepend">
+            
+            <form action="{% url 'search' %}" method="get">
+                <input name="q" type="text" placeholder="Search...">
+            </form><br>
+            
             <a href="{% url 'Filter' %}">
                 <button type="submit" name="filter", class="btn btn-success" >Filter by date</button>        </div>
             </a>
-            <input type="text", name="new">
     </div>
+    
     <!-- /api/contact-list/filter/ -->
     {% for i in contact_list %}
+    
                 {% if i.active == True %}
                     <div class="input-group-text">
                         {% if i.gender == "MALE"%}
