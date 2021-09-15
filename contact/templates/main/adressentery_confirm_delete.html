@@ -20,8 +20,14 @@ a:link {
             {% csrf_token %}
             <br><a href="{% url 'contact-list' %}"><input class="btn btn-success" id="yes" name="yes" type="submit" value="Yes"></a>
         </form> -->
-        <a href="{% url 'contact-list' %}"><input class="btn btn-success" id="yes" name="yes" type="submit" value="Yes"></a>
+        <!-- <a href="{% url 'contact-list' %}"><input class="btn btn-success" id="yes" name="yes" type="submit" value="Yes"></a> -->
 
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="submit" name="confirm" value="Confirm" formmethod="GET">
+            <input type="submit" name="cancel" value="Cancel" formmethod="GET" >
+            <!-- <input name="p" type="text" placeholder="Search..."> -->
+        </form><br>
         
     </div>
     
