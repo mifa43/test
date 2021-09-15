@@ -7,6 +7,8 @@ from django.views import View
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
 from django.db.models import Q
+from django.views.generic.edit import UpdateView, DeletionMixin
+
 class Home(ListView):   # this is class and it's return home page
     model = AdressEntery    # model 
     template_name = "main/home.html"        # template
@@ -46,6 +48,24 @@ class AddContacts(CreateView):
         form.instance.user = self.request.user # we assign a user for the field user in model
         return super(AddContacts, self).form_valid(form)    # save form inputs
 
+# class DeleteContact(UpdateView):    
+#     model = AdressEntery
+#     context_object_name = "obj"
+#     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber", "active")
+#     template_name = "main/adressentery_confirm_delete.html"
+#     success_url = reverse_lazy("contact-list")
+    
+#     def get_queryset(self, *args, **kwargs):
+#         queryset = super(DeleteContact, self).get_queryset()
+#         queryset.filter(id=self.kwargs['pk'])
+#         if self.request.GET.get('cancel') == "Cancel":                    
+#             print("yes cancel")
+#         elif self.request.GET.get('confirm') == "Confirm":
+#             print("yes confirm")
+#             queryset.filter(id=self.kwargs['pk']).update(active=False)
+        
+#         return queryset
+    
 class DeleteContact(DeleteView):    
     model = AdressEntery
     context_object_name = "obj"
@@ -56,8 +76,20 @@ class DeleteContact(DeleteView):
         #return redirect('/api/contact-list/')   #render(request, self.template_name, {})
     def get_queryset(self, *args, **kwargs):
         queryset = super(DeleteContact, self).get_queryset()
-        queryset.filter(id=self.kwargs['pk']).update(active=False)
-        return queryset   # filter by clicked contact card get id and set active false
+        queryset.filter(id=self.kwargs['pk'])
+        if self.request.GET.get('cancel') == "Cancel":                    
+            print("yes cancel")
+            
+        elif self.request.GET.get('confirm') == "Confirm":
+            print("yes confirm")
+            queryset.filter(id=self.kwargs['pk']).update(active=False)
+        
+        return queryset
+    
+    # def get_queryset(self, *args, **kwargs):
+    #     queryset = super(DeleteContact, self).get_queryset()
+    #     queryset.filter(id=self.kwargs['pk']).update(active=False)
+    #     return queryset   # filter by clicked contact card get id and set active false
     
 class UpdateContact(UpdateView):
     model = AdressEntery
