@@ -15,18 +15,20 @@ a:link {
 </style>
     <div class="form" style="text-align: center;">
         <h2>Are you sure you want to delete the "<b>{{ obj.name }}</b>" contact?</h2>
-        <!-- <form action="/api/contact-list/" method="POST" novalidate class="test">
-        
-            {% csrf_token %}
-            <br><a href="{% url 'contact-list' %}"><input class="btn btn-success" id="yes" name="yes" type="submit" value="Yes"></a>
-        </form> -->
-        <!-- <a href="{% url 'contact-list' %}"><input class="btn btn-success" id="yes" name="yes" type="submit" value="Yes"></a> -->
-
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input type="submit" name="confirm" value="Confirm" formmethod="GET">
-            <input type="submit" name="cancel" value="Cancel" formmethod="GET" >
-            <!-- <input name="p" type="text" placeholder="Search..."> -->
+        <script type="text/javascript">
+            function Confirm(form){
+            alert("You have successfully deleted the contact {{obj.name}} !"); 
+            form.submit();
+            
+            }
+        </script>
+        <form name="form" action="" method="GET">
+            
+            <button type="submit" class="btn btn-danger" name="confirm" value="Confirm" formmethod="GET" onClick="Confirm(this.form)">Confirm</button>
+            
+            <button type="submit" class="btn btn-success"name="cancel" value="Cancel" formmethod="GET" formaction="{% url 'contact-list' %}" >Cancel</button>
+            
+            
         </form><br>
         
     </div>
