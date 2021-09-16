@@ -7,7 +7,6 @@ from django.views import View
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
 from django.db.models import Q
-
 class Home(ListView):   # this is class and it's return home page
     model = AdressEntery    # model 
     template_name = "main/home.html"        # template
@@ -46,7 +45,7 @@ class AddContacts(CreateView):
     def form_valid(self, form): # this is similar to what we used if form.is_valid() -> bool
         form.instance.user = self.request.user # we assign a user for the field user in model
         return super(AddContacts, self).form_valid(form)    # save form inputs
-  
+
 class DeleteContact(DeleteView):    
     model = AdressEntery
     context_object_name = "obj"
@@ -57,20 +56,8 @@ class DeleteContact(DeleteView):
         #return redirect('/api/contact-list/')   #render(request, self.template_name, {})
     def get_queryset(self, *args, **kwargs):
         queryset = super(DeleteContact, self).get_queryset()
-        queryset.filter(id=self.kwargs['pk'])   # finding a person's id - id is stored in kwargs
-        if self.request.GET.get('cancel') == "Cancel":      #we capture the action from the form that the button is pressed              
-            print("You have not selected the delete option, so we will take you back to the previous page!") #if it is canceled we return the page back html form action
-        elif self.request.GET.get('confirm') == "Confirm":  #if confirm is pressed we display js popup with the message and set the flag active = false
-            queryset.filter(id=self.kwargs['pk']).update(active=False)  
-        return queryset
-    def render_to_response(self, context):  #allows us to use http methods e.g. redirect or response
-        if context['object'].active == True:    #contact information is stored in a context variable and we read if active is true
-            print("You have not selected the delete option, so we will take you back to the previous page!") #if the flag is active = true it means that the contact has not been deleted and -
-            #we are not doing anything because if the chancel button is pressed it automatically returns to the previous page
-        elif context['object'].active == False: #if the flag = false we redirect to the list of all contacts
-            return redirect('/api/contact-list/')
-        return super().render_to_response(context) 
-    
+        queryset.filter(id=self.kwargs['pk']).update(active=False)
+        return queryset   # filter by clicked contact card get id and set active false
     
 class UpdateContact(UpdateView):
     model = AdressEntery
