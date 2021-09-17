@@ -75,7 +75,7 @@ class UpdateContact(UpdateView):
     model = AdressEntery
     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
     context_object_name = "form"
-    template_name = "main/add_contact.html"
+    template_name = "main/update-contact.html"
     success_url = "/api/contact-list/"
 
 class SearchContact(ListView):
