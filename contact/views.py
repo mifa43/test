@@ -71,7 +71,6 @@ class DeleteContact(DeleteView):
             return redirect('/api/contact-list/')
         return super().render_to_response(context) 
     
-    
 class UpdateContact(UpdateView):
     model = AdressEntery
     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
