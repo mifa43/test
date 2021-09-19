@@ -70,13 +70,12 @@ class DeleteContact(DeleteView):
         elif context['object'].active == False: #if the flag = false we redirect to the list of all contacts
             return redirect('/api/contact-list/')
         return super().render_to_response(context) 
-    
-    
+     
 class UpdateContact(UpdateView):
     model = AdressEntery
     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
     context_object_name = "form"
-    template_name = "main/add_contact.html"
+    template_name = "main/update-contact.html"
     success_url = "/api/contact-list/"
 
 class SearchContact(ListView):
