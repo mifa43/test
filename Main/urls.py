@@ -21,6 +21,7 @@ from registration import views as vis
 from django.contrib.auth.decorators import login_required
 #paths and links in the web application
 urlpatterns = [
+    path("api/contact-list/message/<int:pk>", login_required(views.SearchContact.as_view(), login_url="login"), name="message"),
     path("api/contact-list/search/", login_required(views.SearchContact.as_view(), login_url="login"), name="search"),
     path('', include('django.contrib.auth.urls')),
     path("register/", vis.Register.as_view(), name="register" ),
