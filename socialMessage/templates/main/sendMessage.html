@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+<!-- take everything from -->
+{% block title %}
+Messasge
+{% endblock %}
+{% block content %}
+    <h1>Welcome to message section</h1>
+    <!-- <form action="/" id="usrform" method="">
+      {% csrf_token %}
+      <textarea name="text" placeholder="message"></textarea>
+      <button type="submit" class="btn btn-success"name="sub" value="Cancel" formmethod="GET" formaction="{% url 'contact-list' %}" >Cancel</button>
+    </form> -->
+    <form name="form" id="usrform" action="" method="GET">
+             
+      <button type="submit" class="btn btn-success"name="send" value="Send" formmethod="GET" >Send</button>
+      
+    </form><br>
+    <textarea name="text" form="usrform" placeholder="message"></textarea>
+{% endblock %}
