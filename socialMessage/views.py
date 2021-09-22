@@ -28,6 +28,6 @@ class SendMessages(ListView):
             user_password = os.getenv("DJANGO_EMAIL_PASSWORD")
             connection = [usr.email, user_password, False,]
             print(subject, message, usr.email, to_email, connection)
-            send_mail(subject, message, usr.email, to_email, connection)
+        send_mail(subject, message, usr.email, to_email, connection)
         return queryset
     
