@@ -17,17 +17,18 @@ class SendMessages(ListView):
 
     def get_queryset(self, *args, **kwargs):
         queryset = super(SendMessages, self).get_queryset()
-        
-        
-        if self.request.GET.get('send') == "Send":      
-            usr = self.request.user              
-         
-            message = self.request.GET.get('text')
-            to_email = [self.request.GET.get('email'),]
-            subject = self.request.GET.get('subject')
-            user_password = os.getenv("DJANGO_EMAIL_PASSWORD")
-            connection = [usr.email, user_password, False,]
-            print(subject, message, usr.email, to_email, connection)
-        send_mail(subject, message, usr.email, to_email, connection)
+        usr = self.request.user              
+        message = self.request.GET.get('text')
+        to_email = [self.request.GET.get('email'),]
+        subject = self.request.GET.get('subject')
+        user_password = os.getenv("DJANGO_EMAIL_PASSWORD")
+        connection = [usr.email, user_password, False,]
+        if self.request.GET.get('send') == "Send":
+            send_mail(subject, message, usr.email, to_email, connection)
         return queryset
-    
+     # self.message = self.request.GET.get('text')
+    #         self.to_email = [self.request.GET.get('email'),]
+    #         self.subject = self.request.GET.get('subject')
+    #         self.user_password = os.getenv("DJANGO_EMAIL_PASSWORD")
+    #         self.connection = [self.usr.email, self.user_password, False,]
+    # print(self.subject, self.message, self.usr.email, self.to_email, self.connection)
