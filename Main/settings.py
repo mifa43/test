@@ -51,7 +51,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Main.urls'
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'mifa43kotez@gmail.com'
+EMAIL_HOST_PASSWORD = os.getenv("DJANGO_EMAIL_PASSWORD")
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
