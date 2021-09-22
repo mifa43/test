@@ -4,24 +4,18 @@
 Messasge
 {% endblock %}
 {% block content %}
-    <h1>Welcome to message section</h1>
-    <!-- <form action="/" id="usrform" method="">
-      {% csrf_token %}
-      <textarea name="text" placeholder="message"></textarea>
-      <button type="submit" class="btn btn-success"name="sub" value="Cancel" formmethod="GET" formaction="{% url 'contact-list' %}" >Cancel</button>
-    </form> -->
-   
+    <h1>Welcome to message section</h1> 
     <form name="form" id="usrform" action="" method="GET">
-             
-      
       <br>
-      <input type="email" placeholder="Enter email" name="email"><br>
+      <input type="email" placeholder="Enter target email" name="email" class="form-control"><br>
       <br>
-      <input type="text" placeholder="Subject" name="subject"><br>
+      <input type="text" placeholder="Subject title" name="subject" class="form-control"><br>
       <br>
-      <textarea name="text" form="usrform" placeholder="message"></textarea><br>
+      <textarea name="text" form="usrform" placeholder="Email message" class="form-control"></textarea><br>
       <br>
-      <button type="submit" class="btn btn-success"name="send" value="Send" formmethod="GET" >Send</button>
+      <div style="text-align: center;">
+        <button type="submit" class="btn btn-success"name="send" value="Send" formmethod="GET" style="margin: 0 auto;">Send email</button>
+      </div>
     </form><br>
     
 {% endblock %}
