@@ -10,11 +10,18 @@ Messasge
       <textarea name="text" placeholder="message"></textarea>
       <button type="submit" class="btn btn-success"name="sub" value="Cancel" formmethod="GET" formaction="{% url 'contact-list' %}" >Cancel</button>
     </form> -->
+   
     <form name="form" id="usrform" action="" method="GET">
              
-      <button type="submit" class="btn btn-success"name="send" value="Send" formmethod="GET">Send</button>
-      <input type="text" placeholder="Subject" name="subject">
-      <input type="email" placeholder="Enter email" name="email">
+      
+      <br>
+      <input type="email" placeholder="Enter email" name="email"><br>
+      <br>
+      <input type="text" placeholder="Subject" name="subject"><br>
+      <br>
+      <textarea name="text" form="usrform" placeholder="message"></textarea><br>
+      <br>
+      <button type="submit" class="btn btn-success"name="send" value="Send" formmethod="GET" >Send</button>
     </form><br>
-    <textarea name="text" form="usrform" placeholder="message"></textarea>
+    
 {% endblock %}
