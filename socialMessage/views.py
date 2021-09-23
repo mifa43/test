@@ -1,11 +1,4 @@
-from django.contrib.auth.models import User
-from django.db import connection
-from django.db.models.query import QuerySet
-from django.http.response import HttpResponse
-from django.shortcuts import redirect, render
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
-from django.views.generic.base import TemplateView, View
-from django.views.generic.edit import FormView
 from contact.models import AdressEntery
 from django.core.mail import send_mail
 import os 
