@@ -8,6 +8,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
+    environment:
+      DJANGO_EMAIL_PASSWORD: ${DJANGO_EMAIL_PASSWORD}
     ports:
       - "8001:8000"
     networks:
