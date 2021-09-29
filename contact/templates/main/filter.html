@@ -51,6 +51,7 @@ List of contacts
                                 color: black;
                             }
                         </style>
+                        <a href="{% url 'message' pk=i.id%}" style="text-decoration: none;">Send message</a>
                         <a href="/api/update-contact/{{i.id}}" style="text-decoration: none;">Changes</a>
                         
                         <a href="{% url 'delete' pk=i.id%}"  style="text-decoration: none;">Delete</a>

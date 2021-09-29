@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+<!-- take everything from -->
+{% block title %}
+Messasge
+{% endblock %}
+{% block content %}
+    <h1>Welcome to message section</h1> 
+    <form name="form" id="usrform" action="" method="GET">
+      <br>
+      <input type="email" placeholder="Enter target email" name="email" class="form-control"><br>
+      <br>
+      <input type="text" placeholder="Subject title" name="subject" class="form-control"><br>
+      <br>
+      <textarea name="text" form="usrform" placeholder="Email message" class="form-control"></textarea><br>
+      <br>
+      <div style="text-align: center;">
+        <button type="submit" class="btn btn-success"name="send" value="Send" formmethod="GET" style="margin: 0 auto;">Send email</button>
+      </div>
+    </form><br>
+    
+{% endblock %}
