@@ -76,6 +76,7 @@
             <a href="{% url 'home' %}">Home page</a>
             <a href="{% url 'add-contacts' %}">New contact</a>
             <a href="{% url 'contact-list' %}">Contacts</a>
+            <a href="{% url 'notes' %}">Notes</a>
             {% if user.is_authenticated %}
             {% else %}
                 <a href="{% url 'register' %}">Sign up</a>
