@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'contact.apps.ContactConfig',
     'registration.apps.RegistrationConfig',
-    'socialMessage.apps.SocialmessageConfig'
+    'socialMessage.apps.SocialmessageConfig',
+    'note.apps.NotesConfig',
 ]
 
 MIDDLEWARE = [
