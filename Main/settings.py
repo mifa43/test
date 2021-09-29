@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'contact.apps.ContactConfig',
     'registration.apps.RegistrationConfig',
     'socialMessage.apps.SocialmessageConfig',
-    'note.apps.NotesConfig',
+    'notes.apps.NotesConfig',
 ]
 
 MIDDLEWARE = [
