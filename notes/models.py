@@ -6,7 +6,7 @@ class NoteEntery(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notentery", null=True) #represents the user who is logged in and when creating a contact we assign the user name
     title = models.CharField(max_length = 120)
     note = models.CharField(max_length = 400)
-    date = models.DateField()
-    time = models.TimeField(null=True)
+    date = models.DateField()   ##notification date
+    time = models.TimeField(null=True)  #notification time
     def __str__(self):
         return self.title
