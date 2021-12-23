@@ -16,10 +16,21 @@ class GetListOfContacts(ListView):  # return all contacts for current user
     model = AdressEntery
     context_object_name = "contact_list" #  this will overwrite variabl in html. on first place is something_list
     template_name = "main/contact_list.html"
-    def get_queryset(self): # This method queries the database and filters it
+    def get_queryset(self) -> list: # This method queries the database and filters it
+        """
+        - Check if the user is active True
+            - :True show user
+            - :False do not show user
+            - :return list of active users
+        """
         queryset = super(GetListOfContacts, self).get_queryset()
         return queryset.filter(active=True, user=self.request.user)
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, *args, **kwargs) -> dict:
+        """
+        - The method counts from the list of active contacts
+            - :Method get_queryset -> list(user.active==True) counter +1
+            - :return dict(str)
+        """
         context = super().get_context_data(*args, **kwargs)
         context['counter'] = self.get_queryset().count()
         return context
@@ -29,10 +40,22 @@ class FilterContacts(ListView):
     template_name = "main/filter.html"
     context_object_name = "filter"  
     ordering = "-birthDate"     #just like in old version of code ordering == order_by in methods
-    def get_queryset(self): # query instance
+    def get_queryset(self) -> str: # query instance
+        """
+        :Param ordering = -birthDate(descending)
+        - Check if the user is active True
+            - :True show user
+            - :False do not show user
+            - :return list of active users -> filter(sort_by_date)
+        """
         queryset = super(FilterContacts, self).get_queryset()   # super used to find the "parent class" and return its object
         return queryset.filter(active=True, user=self.request.user) # return query set as filtrered data 
-    def get_context_data(self, *args, **kwargs):    # the way we use to fill in the values from get_queryset()
+    def get_context_data(self, *args, **kwargs) -> dict:    # the way we use to fill in the values from get_queryset()
+        """
+        - The method counts from the list of active contacts
+            - :Method get_queryset -> list(user.active==True) counter +1
+            - :return dict(str)
+        """
         context = super().get_context_data(*args, **kwargs) # when we said super().get_context_data(*args, **kwargs) inherits from get_context_data use ctrl + left click and see where it will take you
         context['counter'] = self.get_queryset().count()    # context['counter'] this is similar to what we used: return render(request, template, {"var": var})
         return context  # and pass to template
@@ -43,7 +66,12 @@ class AddContacts(CreateView):
     template_name = "main/add_contact.html"
     context_object_name = "form" # html variabl form
     success_url = "/api/add-contacts/"  # redirect
-    def form_valid(self, form): # this is similar to what we used if form.is_valid() -> bool
+    def form_valid(self, form) -> bool: # this is similar to what we used if form.is_valid() -> bool
+        """
+        :fields -> model(AdressEntery)
+        - if the form is valid True
+            - :return redirect and clear the fields
+        """
         form.instance.user = self.request.user # we assign a user for the field user in model
         return super(AddContacts, self).form_valid(form)    # save form inputs
   
@@ -52,10 +80,20 @@ class DeleteContact(DeleteView):
     context_object_name = "obj"
     template_name = "main/adressentery_confirm_delete.html"
     success_url = reverse_lazy("contact-list")  # this is redirected to a specific url for the parameter using the name expressed in urls .py   
-    def dispatch(self,request, *args, **kwargs):   #this method allows us to use methods such as (post, get, put ..) and allows us to return HTTP methods such as (response, redirect)
+    def dispatch(self,request, *args, **kwargs) -> dict:   #this method allows us to use methods such as (post, get, put ..) and allows us to return HTTP methods such as (response, redirect)
+        """
+        :Param success_url -> redirection after delete 
+        :return deleted contact 
+        """
         return super(DeleteContact, self).dispatch(request)  #dispatch method will override the second method and allow us to do redirection
         #return redirect('/api/contact-list/')   #render(request, self.template_name, {})
-    def get_queryset(self, *args, **kwargs):
+    def get_queryset(self, *args, **kwargs) -> str:
+        """
+        - form -> if form clicked True
+            - :Cancel -> back to the previous page
+            - :Confirm -> get_queryset(user.active==False)
+            - :return user deleted
+        """
         queryset = super(DeleteContact, self).get_queryset()
         queryset.filter(id=self.kwargs['pk'])   # finding a person's id - id is stored in kwargs
         if self.request.GET.get('cancel') == "Cancel":      #we capture the action from the form that the button is pressed              
@@ -63,7 +101,12 @@ class DeleteContact(DeleteView):
         elif self.request.GET.get('confirm') == "Confirm":  #if confirm is pressed we display js popup with the message and set the flag active = false
             queryset.filter(id=self.kwargs['pk']).update(active=False)  
         return queryset
-    def render_to_response(self, context):  #allows us to use http methods e.g. redirect or response
+    def render_to_response(self, context:dict) -> str:  #allows us to use http methods e.g. redirect or response
+        """
+        - context contact information is stored in a variable 
+            - :param context['object'].active == True -> redirect
+            - :return context['object'].active == Fase -> redirect
+        """
         if context['object'].active == True:    #contact information is stored in a context variable and we read if active is true
             print("You have not selected the delete option, so we will take you back to the previous page!") #if the flag is active = true it means that the contact has not been deleted and -
             #we are not doing anything because if the chancel button is pressed it automatically returns to the previous page
@@ -72,6 +115,10 @@ class DeleteContact(DeleteView):
         return super().render_to_response(context) 
      
 class UpdateContact(UpdateView):
+    """
+    :from -> model(AdressEntery_fields)
+    :return contact updated 
+    """
     model = AdressEntery
     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
     context_object_name = "form"
@@ -82,12 +129,21 @@ class SearchContact(ListView):
     model = AdressEntery
     template_name = "main/search.html"
     context_object_name = "result"
-    def get_queryset(self):
+    def get_queryset(self) -> list:
+        """
+        :param input -> filter(by_input, active=True, current logged_user)
+        :return search_results
+        """
         query_input = self.request.GET.get('q') #get form input
         result_obj = AdressEntery.objects.filter(Q(name__icontains=query_input),active=True, user=self.request.user)    #filter user by input, active and user
         #writing SQL queries allows the use of (&), or (|), negation (~) If the operator is not included then by default 'AND' operator is used
         return result_obj
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, *args, **kwargs) -> dict:
+        """
+        - The method counts search_results from the list of active contacts
+            - :Method get_queryset -> list(by_input, active=True, current logged_user) counter +1
+            - :return dict(str)
+        """
         context = super().get_context_data(*args, **kwargs)
         context['counter'] = self.get_queryset().count()    # counting number of contacts in results of search
         return context
