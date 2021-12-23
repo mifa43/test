@@ -16,7 +16,7 @@ class GetListOfContacts(ListView):  # return all contacts for current user
     model = AdressEntery
     context_object_name = "contact_list" #  this will overwrite variabl in html. on first place is something_list
     template_name = "main/contact_list.html"
-    def get_queryset(self) -> list(str): # This method queries the database and filters it
+    def get_queryset(self) -> list: # This method queries the database and filters it
         """
         - Check if the user is active True
             - :True show user
@@ -25,7 +25,7 @@ class GetListOfContacts(ListView):  # return all contacts for current user
         """
         queryset = super(GetListOfContacts, self).get_queryset()
         return queryset.filter(active=True, user=self.request.user)
-    def get_context_data(self, *args, **kwargs) -> dict(str):
+    def get_context_data(self, *args, **kwargs) -> dict:
         """
         - The method counts from the list of active contacts
             - :Method get_queryset -> list(user.active==True) counter +1
@@ -50,7 +50,7 @@ class FilterContacts(ListView):
         """
         queryset = super(FilterContacts, self).get_queryset()   # super used to find the "parent class" and return its object
         return queryset.filter(active=True, user=self.request.user) # return query set as filtrered data 
-    def get_context_data(self, *args, **kwargs) -> dict(str):    # the way we use to fill in the values from get_queryset()
+    def get_context_data(self, *args, **kwargs) -> dict:    # the way we use to fill in the values from get_queryset()
         """
         - The method counts from the list of active contacts
             - :Method get_queryset -> list(user.active==True) counter +1
@@ -66,7 +66,12 @@ class AddContacts(CreateView):
     template_name = "main/add_contact.html"
     context_object_name = "form" # html variabl form
     success_url = "/api/add-contacts/"  # redirect
-    def form_valid(self, form): # this is similar to what we used if form.is_valid() -> bool
+    def form_valid(self, form) -> bool: # this is similar to what we used if form.is_valid() -> bool
+        """
+        :fields -> model(AdressEntery)
+        - if the form is valid True
+            - :return redirect and clear the fields
+        """
         form.instance.user = self.request.user # we assign a user for the field user in model
         return super(AddContacts, self).form_valid(form)    # save form inputs
   
