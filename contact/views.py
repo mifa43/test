@@ -25,7 +25,12 @@ class GetListOfContacts(ListView):  # return all contacts for current user
         """
         queryset = super(GetListOfContacts, self).get_queryset()
         return queryset.filter(active=True, user=self.request.user)
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, *args, **kwargs) -> dict(str):
+        """
+        - The method counts from the list of active contacts
+            - :Method get_queryset -> list(user.active==True) counter +1
+            - :return dict(str)
+        """
         context = super().get_context_data(*args, **kwargs)
         context['counter'] = self.get_queryset().count()
         return context
