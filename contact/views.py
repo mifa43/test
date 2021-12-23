@@ -80,10 +80,20 @@ class DeleteContact(DeleteView):
     context_object_name = "obj"
     template_name = "main/adressentery_confirm_delete.html"
     success_url = reverse_lazy("contact-list")  # this is redirected to a specific url for the parameter using the name expressed in urls .py   
-    def dispatch(self,request, *args, **kwargs):   #this method allows us to use methods such as (post, get, put ..) and allows us to return HTTP methods such as (response, redirect)
+    def dispatch(self,request, *args, **kwargs) -> dict:   #this method allows us to use methods such as (post, get, put ..) and allows us to return HTTP methods such as (response, redirect)
+        """
+        :Param success_url -> redirection after delete 
+        :return deleted contact 
+        """
         return super(DeleteContact, self).dispatch(request)  #dispatch method will override the second method and allow us to do redirection
         #return redirect('/api/contact-list/')   #render(request, self.template_name, {})
-    def get_queryset(self, *args, **kwargs):
+    def get_queryset(self, *args, **kwargs) -> str:
+        """
+        - form -> if form clicked True
+            - :Cancel -> back to the previous page
+            - :Confirm -> get_queryset(user.active==False)
+            - :return user deleted
+        """
         queryset = super(DeleteContact, self).get_queryset()
         queryset.filter(id=self.kwargs['pk'])   # finding a person's id - id is stored in kwargs
         if self.request.GET.get('cancel') == "Cancel":      #we capture the action from the form that the button is pressed              
@@ -91,7 +101,12 @@ class DeleteContact(DeleteView):
         elif self.request.GET.get('confirm') == "Confirm":  #if confirm is pressed we display js popup with the message and set the flag active = false
             queryset.filter(id=self.kwargs['pk']).update(active=False)  
         return queryset
-    def render_to_response(self, context):  #allows us to use http methods e.g. redirect or response
+    def render_to_response(self, context:dict) -> str:  #allows us to use http methods e.g. redirect or response
+        """
+        - context contact information is stored in a variable 
+            - :param context['object'].active == True -> redirect
+            - :return context['object'].active == Fase -> redirect
+        """
         if context['object'].active == True:    #contact information is stored in a context variable and we read if active is true
             print("You have not selected the delete option, so we will take you back to the previous page!") #if the flag is active = true it means that the contact has not been deleted and -
             #we are not doing anything because if the chancel button is pressed it automatically returns to the previous page
