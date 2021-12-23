@@ -40,7 +40,14 @@ class FilterContacts(ListView):
     template_name = "main/filter.html"
     context_object_name = "filter"  
     ordering = "-birthDate"     #just like in old version of code ordering == order_by in methods
-    def get_queryset(self): # query instance
+    def get_queryset(self) -> str: # query instance
+        """
+        :Param ordering = -birthDate(descending)
+        - Check if the user is active True
+            - :True show user
+            - :False do not show user
+            - :return list of active users -> filter(sort_by_date)
+        """
         queryset = super(FilterContacts, self).get_queryset()   # super used to find the "parent class" and return its object
         return queryset.filter(active=True, user=self.request.user) # return query set as filtrered data 
     def get_context_data(self, *args, **kwargs):    # the way we use to fill in the values from get_queryset()
