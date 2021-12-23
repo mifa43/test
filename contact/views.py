@@ -115,6 +115,10 @@ class DeleteContact(DeleteView):
         return super().render_to_response(context) 
      
 class UpdateContact(UpdateView):
+    """
+    :from -> model(AdressEntery_fields)
+    :return contact updated 
+    """
     model = AdressEntery
     fields = ("name", "gender", "birthDate", "firstName", "lastName", "phoneNumber")
     context_object_name = "form"
