@@ -50,7 +50,12 @@ class FilterContacts(ListView):
         """
         queryset = super(FilterContacts, self).get_queryset()   # super used to find the "parent class" and return its object
         return queryset.filter(active=True, user=self.request.user) # return query set as filtrered data 
-    def get_context_data(self, *args, **kwargs):    # the way we use to fill in the values from get_queryset()
+    def get_context_data(self, *args, **kwargs) -> dict(str):    # the way we use to fill in the values from get_queryset()
+        """
+        - The method counts from the list of active contacts
+            - :Method get_queryset -> list(user.active==True) counter +1
+            - :return dict(str)
+        """
         context = super().get_context_data(*args, **kwargs) # when we said super().get_context_data(*args, **kwargs) inherits from get_context_data use ctrl + left click and see where it will take you
         context['counter'] = self.get_queryset().count()    # context['counter'] this is similar to what we used: return render(request, template, {"var": var})
         return context  # and pass to template
