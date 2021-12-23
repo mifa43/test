@@ -129,12 +129,21 @@ class SearchContact(ListView):
     model = AdressEntery
     template_name = "main/search.html"
     context_object_name = "result"
-    def get_queryset(self):
+    def get_queryset(self) -> list:
+        """
+        :param input -> filter(by_input, active=True, current logged_user)
+        :return search_results
+        """
         query_input = self.request.GET.get('q') #get form input
         result_obj = AdressEntery.objects.filter(Q(name__icontains=query_input),active=True, user=self.request.user)    #filter user by input, active and user
         #writing SQL queries allows the use of (&), or (|), negation (~) If the operator is not included then by default 'AND' operator is used
         return result_obj
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, *args, **kwargs) -> dict:
+        """
+        - The method counts search_results from the list of active contacts
+            - :Method get_queryset -> list(by_input, active=True, current logged_user) counter +1
+            - :return dict(str)
+        """
         context = super().get_context_data(*args, **kwargs)
         context['counter'] = self.get_queryset().count()    # counting number of contacts in results of search
         return context
