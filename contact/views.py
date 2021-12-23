@@ -16,7 +16,13 @@ class GetListOfContacts(ListView):  # return all contacts for current user
     model = AdressEntery
     context_object_name = "contact_list" #  this will overwrite variabl in html. on first place is something_list
     template_name = "main/contact_list.html"
-    def get_queryset(self): # This method queries the database and filters it
+    def get_queryset(self) -> list(str): # This method queries the database and filters it
+        """
+        - Check if the user is active True
+            - :True show user
+            - :False do not show user
+            - :return list of active users
+        """
         queryset = super(GetListOfContacts, self).get_queryset()
         return queryset.filter(active=True, user=self.request.user)
     def get_context_data(self, *args, **kwargs):
