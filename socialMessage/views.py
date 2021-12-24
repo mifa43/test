@@ -7,7 +7,18 @@ class SendMessages(ListView):
     template_name = "main/sendMessage.html"
     fields = ['phoneNumber']
     context_object_name = "obj"
-    def get_queryset(self, *args, **kwargs):
+    def get_queryset(self, *args, **kwargs) -> str:
+        """
+        :usr get sender email from settings
+        :message html form input
+        :to_email target email
+        :subject email title
+        :user_password get sender password from settings
+        :connection configuration
+        - if button send is clicked 
+            - send_mail -> send an email 
+            - *turn off the settings on the email (less security) and avast
+        """
         queryset = super(SendMessages, self).get_queryset()
         usr = self.request.user  #get an email from the currently logged in user
         message = self.request.GET.get('text')  #html input message
